@@ -15,7 +15,7 @@ const programas = [
         id: 2,
         nombre: "¿Quién Sabe Más?",
         descripcion: "Concurso de Cultura General",
-        imagen: "/img/quien_sabe_mas.png",
+        imagen: "https://gamingespyt.github.io/lasventurasnews/img/quien_sabe_mas.png",
         url: "programa.html?id=2",
         animacion: "animate__fadeInRight"
     }
