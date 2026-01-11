@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Video | Las Venturas News</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Inter:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="header.js" defer></script>
+    <script src="programas.js" defer></script>
+    <script src="episodios.js" defer></script>
+    <script src="script.js" defer></script>
+</head>
+
+<body class="bg-gray-100 font-inter">
+
+    <!-- Header dinámico cargado desde header.js -->
+    <div id="header-container"></div>
+
+
+    <main class="container mx-auto px-4 py-8 max-w-5xl">
+        <div class="bg-black rounded-3xl overflow-hidden shadow-2xl mb-8">
+            <div id="video-container" class="aspect-video">
+                <!-- El video se cargará dinámicamente aquí -->
+            </div>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl shadow-sm">
+            <h1 id="video-titulo" class="text-4xl font-oswald font-bold text-gray-900 mb-4">Cargando...</h1>
+            <div class="flex items-center space-x-4 mb-6 pb-6 border-b border-gray-100">
+                <span id="video-programa"
+                    class="bg-red-100 text-red-600 px-3 py-1 rounded-full text-sm font-bold uppercase tracking-wider">...</span>
+                <span class="text-gray-400 text-sm">Emitido el <span id="video-fecha">...</span></span>
+            </div>
+
+            <div class="prose max-w-none text-gray-600 leading-relaxed">
+                <p id="video-descripcion">Cargando descripción...</p>
+                <p class="mt-4">No olvides suscribirte a nuestro canal para no perderte ninguna actualización importante
+                    sobre la actualidad de nuestra comunidad.</p>
+            </div>
+        </div>
+    </main>
+
+</body>
+
+</html>

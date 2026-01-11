@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programación | Las Venturas News</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Inter:wght@400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="header.js" defer></script>
+    <script src="programas.js" defer></script>
+    <script src="episodios.js" defer></script>
+    <script src="script.js" defer></script>
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- Header dinámico cargado desde header.js -->
+    <div id="header-container"></div>
+
+    <div id="programa-banner" class="w-full h-64 bg-red-700 flex items-center justify-center relative overflow-hidden">
+        <img id="programa-imagen" src="" class="absolute inset-0 w-full h-full object-cover opacity-30">
+        <div class="relative z-10 text-center animate__animated animate__zoomIn">
+            <h2 id="programa-titulo" class="text-6xl font-oswald text-white uppercase italic tracking-tighter">
+                Cargando...</h2>
+            <p id="programa-subtitulo" class="text-red-100 mt-2 font-medium tracking-widest">EDICIÓN CENTRAL</p>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-4 py-12">
+        <h3 class="text-2xl font-bold text-gray-800 mb-8 border-l-4 border-red-600 pl-4">Episodios Recientes</h3>
+
+        <!-- Contenedor dinámico para episodios -->
+        <div id="episodios-container" class="grid md:grid-cols-3 gap-8">
+            <!-- Los episodios se cargarán aquí dinámicamente desde script.js -->
+        </div>
+    </main>
+</body>
+
+</html>

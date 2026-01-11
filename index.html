@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Las Venturas News | Inicio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Inter:wght@300;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="header.js" defer></script>
+    <script src="programas.js" defer></script>
+    <script src="script.js" defer></script>
+</head>
+
+<body class="overflow-x-hidden bg-gray-100">
+
+    <!-- Header dinámico cargado desde header.js -->
+    <div id="header-container"></div>
+
+    <main class="container mx-auto px-4 py-16">
+        <div class="text-center mb-16 animate__animated animate__fadeIn">
+            <h2 class="text-5xl font-oswald font-bold text-gray-900 mb-4 uppercase italic">Tu conexión con la ciudad
+            </h2>
+            <p class="text-gray-500 max-w-2xl mx-auto text-lg">Selecciona uno de nuestros programas para ver las últimas
+                emisiones y noticias exclusivas.</p>
+        </div>
+
+        <!-- Contenedor dinámico para programas -->
+        <div id="programas-container" class="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+            <!-- Los programas se cargarán aquí dinámicamente desde script.js -->
+        </div>
+    </main>
+
+    <footer class="mt-20 py-10 border-t border-gray-200 text-center text-gray-400">
+        <p>&copy; 2024 Las Venturas News Media Group. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+
+</html>
