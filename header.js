@@ -9,6 +9,11 @@ function renderizarHeader() {
     const headerContainer = document.getElementById('header-container');
     if (!headerContainer) return;
 
+    // Generar enlaces de programas dinámicamente
+    const enlacesProgramas = programas.map(programa =>
+        `<a href="${programa.url}" class="hover:text-red-600 transition">${programa.nombre}</a>`
+    ).join('');
+
     headerContainer.innerHTML = `
         <header class="bg-white border-b-4 border-red-600 p-6 shadow-sm sticky top-0 z-50">
             <div class="container mx-auto flex justify-between items-center">
@@ -17,7 +22,7 @@ function renderizarHeader() {
                 </a>
                 <nav class="space-x-6 font-medium text-gray-600">
                     <a href="index.html" class="hover:text-red-600 transition">Inicio</a>
-                    <a href="#" class="hover:text-red-600 transition">En Directo</a>
+                    ${enlacesProgramas}
                 </nav>
             </div>
         </header>
