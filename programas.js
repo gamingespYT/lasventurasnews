@@ -7,7 +7,7 @@ const programas = [
         id: 1,
         nombre: "Noticiero",
         descripcion: "Edición Central",
-        imagen: "https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&q=80&w=800",
+        imagen: "https://gamingespyt.github.io/lasventurasnews/img/news.png",
         url: "programa.html?id=1",
         animacion: "animate__fadeInLeft",
         color: "#dc2626" // Rojo
