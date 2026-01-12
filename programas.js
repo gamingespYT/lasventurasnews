@@ -20,7 +20,16 @@ const programas = [
         url: "programa.html?id=2",
         animacion: "animate__fadeInRight",
         color: "#2563eb" // Azul
-    }
+    },
+    {
+        id: 3,
+        nombre: "Extras",
+        descripcion: "Programas adicionales para nuestros ciudadanos",
+        imagen: "https://gamingespyt.github.io/lasventurasnews/img/",
+        url: "programa.html?id=3",
+        animacion: "animate__fadeInLeft",
+        color: "#26dc2fff" // Verde
+    },
 ];
 
 // ========================================
