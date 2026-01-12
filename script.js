@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (typeof renderizarEpisodios === 'function') {
             renderizarEpisodios(programaId);
         }
-    } else if (path.includes('video.html')) {
+    } else if (path.includes('episodio.html')) {
         // Página de video - cargar detalles del episodio
         if (typeof cargarDetalleEpisodio === 'function') {
             cargarDetalleEpisodio();

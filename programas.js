@@ -6,7 +6,7 @@ const programas = [
     {
         id: 1,
         nombre: "Noticiero",
-        descripcion: "Edición Central",
+        descripcion: "Todas las noticias al alcance de la ciudadania",
         imagen: "https://gamingespyt.github.io/lasventurasnews/img/news.png",
         url: "programa.html?id=1",
         animacion: "animate__fadeInLeft",
