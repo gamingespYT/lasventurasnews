@@ -23,8 +23,8 @@ const programas = [
     },
     {
         id: 3,
-        nombre: "Extras",
-        descripcion: "Programas adicionales para nuestros ciudadanos",
+        nombre: "Reportajes Especiales",
+        descripcion: "Programas o reportajes especiales",
         imagen: "https://gamingespyt.github.io/lasventurasnews/img/reportaje_especial.png",
         url: "programa.html?id=3",
         animacion: "animate__fadeInLeft",
