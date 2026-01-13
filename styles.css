@@ -50,14 +50,14 @@ footer {
 }
 
 /* Asegurar que el video siempre sea responsive */
-.aspect-video {
+#video-container.aspect-video {
     position: relative;
     padding-bottom: 56.25%;
     /* 16:9 aspect ratio */
 }
 
-.aspect-video iframe,
-.aspect-video video {
+#video-container.aspect-video iframe,
+#video-container.aspect-video video {
     position: absolute;
     top: 0;
     left: 0;
