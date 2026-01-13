@@ -70,10 +70,53 @@ const episodios = [
 // ========================================
 
 /**
+ * Parsea una fecha en formato español (DD de Mes del YYYY) a objeto Date
+ * @param {string} fechaStr - Fecha en formato español
+ * @returns {Date} Objeto Date
+ */
+function parsearFechaEspañola(fechaStr) {
+    const meses = {
+        'enero': 0, 'febrero': 1, 'marzo': 2, 'abril': 3,
+        'mayo': 4, 'junio': 5, 'julio': 6, 'agosto': 7,
+        'septiembre': 8, 'octubre': 9, 'noviembre': 10, 'diciembre': 11
+    };
+
+    // Formato esperado: "DD de Mes del YYYY"
+    const partes = fechaStr.toLowerCase().match(/(\d+)\s+de\s+(\w+)\s+del\s+(\d+)/);
+    if (partes) {
+        const dia = parseInt(partes[1]);
+        const mes = meses[partes[2]];
+        const año = parseInt(partes[3]);
+        return new Date(año, mes, dia);
+    }
+    return new Date(); // Retornar fecha actual si no se puede parsear
+}
+
+/**
+ * Ordena los episodios según el criterio seleccionado
+ * @param {Array} episodios - Array de episodios a ordenar
+ * @param {string} orden - 'reciente' o 'antiguo'
+ * @returns {Array} Array de episodios ordenados
+ */
+function ordenarEpisodios(episodios, orden = 'reciente') {
+    return [...episodios].sort((a, b) => {
+        const fechaA = parsearFechaEspañola(a.fecha);
+        const fechaB = parsearFechaEspañola(b.fecha);
+
+        if (orden === 'reciente') {
+            return fechaB - fechaA; // Más reciente primero
+        } else {
+            return fechaA - fechaB; // Más antiguo primero
+        }
+    });
+}
+
+/**
  * Renderiza los episodios en la página de programa
  * @param {number} programaId - ID del programa a filtrar (opcional)
+ * @param {string} orden - Orden de los episodios ('reciente' o 'antiguo')
  */
-function renderizarEpisodios(programaId = null) {
+function renderizarEpisodios(programaId = null, orden = 'reciente') {
     const contenedor = document.getElementById('episodios-container');
     if (!contenedor) return;
 
@@ -97,6 +140,9 @@ function renderizarEpisodios(programaId = null) {
         episodiosFiltrados = episodios.filter(ep => ep.programaId === programaId);
     }
 
+    // Ordenar episodios según el criterio seleccionado
+    episodiosFiltrados = ordenarEpisodios(episodiosFiltrados, orden);
+
     // Generar HTML para cada episodio
     contenedor.innerHTML = episodiosFiltrados.map((episodio, index) => `
         <a href="episodio.html?id=${episodio.id}" class="group block">
@@ -118,6 +164,24 @@ function renderizarEpisodios(programaId = null) {
             </div>
         </a>
     `).join('');
+}
+
+/**
+ * Inicializa el evento de cambio de ordenación
+ */
+function inicializarOrdenamiento() {
+    const selector = document.getElementById('ordenar-episodios');
+    if (!selector) return;
+
+    // Obtener el ID del programa de la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const programaId = parseInt(urlParams.get('id'));
+
+    // Event listener para cambios en el selector
+    selector.addEventListener('change', (e) => {
+        const orden = e.target.value;
+        renderizarEpisodios(programaId, orden);
+    });
 }
 
 /**

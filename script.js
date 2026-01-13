@@ -21,6 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (typeof renderizarEpisodios === 'function') {
             renderizarEpisodios(programaId);
         }
+
+        // Inicializar el ordenamiento
+        if (typeof inicializarOrdenamiento === 'function') {
+            inicializarOrdenamiento();
+        }
     } else if (path.includes('episodio.html')) {
         // Página de video - cargar detalles del episodio
         if (typeof cargarDetalleEpisodio === 'function') {

@@ -4,7 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta Tags -->
     <title>Programación | Las Venturas News</title>
+    <meta name="description"
+        content="Descubre todos los programas de Las Venturas News: Noticiero con las últimas noticias, ¿Quién Sabe Más? concurso de cultura general, y Reportajes Especiales exclusivos.">
+    <meta name="keywords"
+        content="programación Las Venturas News, noticiero, quién sabe más, reportajes especiales, episodios, programas">
+    <meta name="author" content="Las Venturas News">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gamingespyt.github.io/lasventurasnews/programa.html">
+    <meta property="og:title" content="Programación | Las Venturas News">
+    <meta property="og:description"
+        content="Descubre todos los programas de Las Venturas News: noticias, concursos y reportajes especiales.">
+    <meta property="og:image" content="https://gamingespyt.github.io/lasventurasnews/img/news.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://gamingespyt.github.io/lasventurasnews/programa.html">
+    <meta property="twitter:title" content="Programación | Las Venturas News">
+    <meta property="twitter:description"
+        content="Descubre todos los programas de Las Venturas News: noticias, concursos y reportajes especiales.">
+    <meta property="twitter:image" content="https://gamingespyt.github.io/lasventurasnews/img/news.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="img/logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/logo.png">
+    <link rel="apple-touch-icon" href="img/logo.png">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Inter:wght@400;600&display=swap"
@@ -31,7 +61,19 @@
     </div>
 
     <main class="container mx-auto px-4 py-12">
-        <h3 class="text-2xl font-bold text-gray-800 mb-8 border-l-4 border-red-600 pl-4">Episodios Recientes</h3>
+        <div class="flex justify-between items-center mb-8">
+            <h3 class="text-2xl font-bold text-gray-800 border-l-4 border-red-600 pl-4">Episodios Recientes</h3>
+
+            <!-- Selector de ordenación -->
+            <div class="flex items-center gap-3">
+                <label for="ordenar-episodios" class="text-gray-600 font-medium">Ordenar por:</label>
+                <select id="ordenar-episodios"
+                    class="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded-lg shadow-sm hover:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition cursor-pointer">
+                    <option value="reciente">Más reciente</option>
+                    <option value="antiguo">Más antiguo</option>
+                </select>
+            </div>
+        </div>
 
         <!-- Contenedor dinámico para episodios -->
         <div id="episodios-container" class="grid md:grid-cols-3 gap-8">
