@@ -25,7 +25,7 @@ const programas = [
         id: 3,
         nombre: "Extras",
         descripcion: "Programas adicionales para nuestros ciudadanos",
-        imagen: "https://gamingespyt.github.io/lasventurasnews/img/",
+        imagen: "https://gamingespyt.github.io/lasventurasnews/img/reportaje_especial.png",
         url: "programa.html?id=3",
         animacion: "animate__fadeInLeft",
         color: "#26dc2fff" // Verde
