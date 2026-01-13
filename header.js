@@ -11,22 +11,103 @@ function renderizarHeader() {
 
     // Generar enlaces de programas dinámicamente
     const enlacesProgramas = programas.map(programa =>
-        `<a href="${programa.url}" class="hover:text-red-600 transition">${programa.nombre}</a>`
+        `<a href="${programa.url}" class="mobile-menu-link hover:bg-red-50 hover:text-red-600 transition px-6 py-4 block border-b border-gray-100">${programa.nombre}</a>`
     ).join('');
 
     headerContainer.innerHTML = `
-        <header class="bg-white border-b-4 border-red-600 p-6 shadow-sm sticky top-0 z-50">
-            <div class="container mx-auto flex justify-between items-center">
-                <a href="index.html" class="text-3xl font-oswald font-bold tracking-tighter text-gray-800 hover:opacity-80 transition">
-                    LAS VENTURAS <span class="text-red-600">NEWS</span>
-                </a>
-                <nav class="space-x-6 font-medium text-gray-600">
-                    <a href="index.html" class="hover:text-red-600 transition">Inicio</a>
-                    ${enlacesProgramas}
-                </nav>
+        <header class="bg-white border-b-4 border-red-600 p-4 md:p-6 shadow-sm sticky top-0 z-50">
+            <div class="container mx-auto">
+                <div class="flex justify-between items-center">
+                    <!-- Logo -->
+                    <a href="index.html" class="text-2xl md:text-3xl font-oswald font-bold tracking-tighter text-gray-800 hover:opacity-80 transition">
+                        LAS VENTURAS <span class="text-red-600">NEWS</span>
+                    </a>
+                    
+                    <!-- Menú Desktop (solo visible en pantallas grandes) -->
+                    <nav class="hidden lg:flex space-x-6 font-medium text-gray-600">
+                        <a href="index.html" class="hover:text-red-600 transition">Inicio</a>
+                        ${programas.map(p => `<a href="${p.url}" class="hover:text-red-600 transition">${p.nombre}</a>`).join('')}
+                    </nav>
+                    
+                    <!-- Botón hamburguesa móvil/tablet -->
+                    <button id="menu-toggle" class="lg:hidden text-gray-800 hover:text-red-600 transition focus:outline-none z-50" aria-label="Toggle menu">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </header>
+        
+        <!-- Overlay oscuro -->
+        <div id="menu-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden transition-opacity duration-300"></div>
+        
+        <!-- Menú Lateral Móvil/Tablet -->
+        <nav id="mobile-menu" class="fixed top-0 left-0 h-full w-80 max-w-[85%] bg-white shadow-2xl z-50 transform -translate-x-full transition-transform duration-300 ease-in-out lg:hidden">
+            <div class="flex flex-col h-full">
+                <!-- Header del menú lateral -->
+                <div class="bg-gradient-to-r from-red-600 to-red-700 p-6 flex justify-between items-center">
+                    <h2 class="text-white text-xl font-oswald font-bold tracking-wider">MENÚ</h2>
+                    <button id="menu-close" class="text-white hover:text-gray-200 transition" aria-label="Close menu">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Enlaces del menú -->
+                <div class="flex-1 overflow-y-auto">
+                    <a href="index.html" class="mobile-menu-link hover:bg-red-50 hover:text-red-600 transition px-6 py-4 block border-b border-gray-100 font-medium text-gray-700">
+                        Inicio
+                    </a>
+                    ${enlacesProgramas}
+                </div>
+                
+                <!-- Footer del menú lateral -->
+                <div class="p-6 border-t border-gray-200 bg-gray-50">
+                    <p class="text-sm text-gray-500 text-center">
+                        © ${new Date().getFullYear()} Las Venturas News
+                    </p>
+                </div>
+            </div>
+        </nav>
     `;
+
+    // Añadir funcionalidad al menú lateral
+    const menuToggle = document.getElementById('menu-toggle');
+    const menuClose = document.getElementById('menu-close');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuOverlay = document.getElementById('menu-overlay');
+    const menuLinks = document.querySelectorAll('.mobile-menu-link');
+
+    function openMenu() {
+        mobileMenu.classList.remove('-translate-x-full');
+        menuOverlay.classList.remove('hidden');
+        document.body.style.overflow = 'hidden'; // Evitar scroll del body
+    }
+
+    function closeMenu() {
+        mobileMenu.classList.add('-translate-x-full');
+        menuOverlay.classList.add('hidden');
+        document.body.style.overflow = ''; // Restaurar scroll del body
+    }
+
+    if (menuToggle) {
+        menuToggle.addEventListener('click', openMenu);
+    }
+
+    if (menuClose) {
+        menuClose.addEventListener('click', closeMenu);
+    }
+
+    if (menuOverlay) {
+        menuOverlay.addEventListener('click', closeMenu);
+    }
+
+    // Cerrar menú al hacer clic en un enlace
+    menuLinks.forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
 }
 
 /**

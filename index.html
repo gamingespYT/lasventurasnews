@@ -48,16 +48,18 @@
     <!-- Header dinámico cargado desde header.js -->
     <div id="header-container"></div>
 
-    <main class="container mx-auto px-4 py-16">
-        <div class="text-center mb-16 animate__animated animate__fadeIn">
-            <h2 class="text-5xl font-oswald font-bold text-gray-900 mb-4 uppercase italic">Tu conexión con la ciudad
+    <main class="container mx-auto px-4 py-12 md:py-16">
+        <div class="text-center mb-12 md:mb-16 animate__animated animate__fadeIn">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-oswald font-bold text-gray-900 mb-4 uppercase italic">Tu
+                conexión con la ciudad
             </h2>
-            <p class="text-gray-500 max-w-2xl mx-auto text-lg">Selecciona uno de nuestros programas para ver las últimas
+            <p class="text-gray-500 max-w-2xl mx-auto text-base md:text-lg px-4">Selecciona uno de nuestros programas
+                para ver las últimas
                 emisiones y noticias exclusivas.</p>
         </div>
 
         <!-- Contenedor dinámico para programas -->
-        <div id="programas-container" class="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+        <div id="programas-container" class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 max-w-5xl mx-auto">
             <!-- Los programas se cargarán aquí dinámicamente desde script.js -->
         </div>
     </main>

@@ -27,3 +27,40 @@ body {
 footer {
     background: linear-gradient(to right, #1F2937, #111827);
 }
+
+/* Mejoras responsive */
+@media (max-width: 768px) {
+
+    /* Reducir efectos hover en móvil para mejor rendimiento */
+    .card-program:hover {
+        transform: none;
+    }
+
+    /* Asegurar que las imágenes no se desborden */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Ajustar padding del container en móvil */
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+/* Asegurar que el video siempre sea responsive */
+.aspect-video {
+    position: relative;
+    padding-bottom: 56.25%;
+    /* 16:9 aspect ratio */
+}
+
+.aspect-video iframe,
+.aspect-video video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
