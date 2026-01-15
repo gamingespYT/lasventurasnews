@@ -61,6 +61,30 @@ const episodios = [
         descripcion: "<strong>REPORTAJE ESPECIAL: EL VERDADERO ANTONIO</strong><br>En esta entrega especial de <strong>Las Venturas News</strong>, nos alejamos del bullicio de los titulares diarios para adentrarnos en una historia de invisibilidad, dignidad y supervivencia. <strong>Antonio</strong>, un vecino que forma parte del paisaje cotidiano de la ciudad, nos abre las puertas de su dulce morada, un rincón en la calle donde convive con otros compañeros y se calienta junto a un barril. Antonio relata que vive de la chatarra, transportando sus hallazgos en un carrito y moviéndose en su vehículo insignia, un coche de más de 70 años que compró por 50 euros y que, a pesar de no tener ITV ni lujos, es su medio de vida. Su historia es la de un niño que fue abandonado en un orfanato y que a los 9 años decidió escapar para criarse en la calle, una realidad que le ha marcado profundamente pero que no ha logrado borrar su honradez y su buen corazón.<br><br><strong>UNA VIDA BASADA EN LA HONRADEZ Y EL CARIÑO</strong><br>Para <strong>Antonio</strong>, los valores fundamentales son la sinceridad, la fidelidad y el cariño. A pesar de las dificultades y de los prejuicios de una sociedad que a menudo juzga por el envoltorio externo, él se define como una persona pobre pero honrada. Durante el reportaje, nos muestra su cotidianeidad, incluyendo su lugar de aseo: el canal de la ciudad. Aunque el agua no siempre está limpia, Antonio mantiene su rutina de higiene cuando el tiempo y las condiciones lo permiten, realizando incluso una demostración de su baño habitual con valentía frente al frío. Su filosofía de vida se basa en encontrar la felicidad a su manera, pidiendo a la gente que no sea tan superficial y que aprenda a mirar más al corazón.<br><br><strong>SOLIDARIDAD Y RECONOCIMIENTO CIUDADANO</strong><br>El impacto de <strong>Antonio</strong> en la comunidad es innegable. Durante una visita a un taller local, la encargada <strong>Dana</strong> le permite recoger piezas de una motocicleta vieja para su negocio de chatarra e incluso le ofrece comida, un gesto que Antonio recibe con profunda gratitud. Ciudadanos y conocidos definen a Antonio como un ser de luz que, a pesar de haber sufrido mucho, siempre tiene una sonrisa para los demás. Personas como <strong>Dana</strong> y otros vecinos expresan su deseo de verlo crecer y salir adelante, recordándole que en <strong>Las Venturas</strong> cuenta con una familia que está dispuesta a apoyarle sin que tenga que pedir ayuda.<br><br><strong>SUEÑOS Y RECUERDOS: LA HUMANIDAD DETRÁS DEL PERSONAJE</strong><br>El documental nos permite conocer los momentos más íntimos de <strong>Antonio</strong>. Entre sus recuerdos más felices destaca un trenecito de lata que recibió de niño, un detalle que todavía hoy le emociona hasta las lágrimas. Por otro lado, lamenta cómo la gente a menudo lo confunde con un delincuente solo por su aspecto descuidado. Su mayor sueño por cumplir es reencontrarse con la familia que le abandonó, conocer a sus padres y saber si tiene hermanos. Con este reportaje, <strong>Las Venturas News</strong> busca humanizar la información y recordar que, detrás de cada esquina de la ciudad, hay una historia que merece ser escuchada con respeto y dignidad.",
         videoId: "sL3yPfhZFzA",
         fecha: "28 de diciembre del 2025"
+    },
+    {
+        id: 7,
+        programaId: 4,
+        titulo: "REPORTAJE - LA HISTORIA DE LA FAMILIA BROWN",
+        descripcion: "<strong>REPORTAJE ESPECIAL: EL TESTIMONIO DE LA FAMILIA BROWN</strong><br>En esta entrega especial de <strong>Las Venturas News</strong>, nos alejamos de la actualidad diaria para profundizar en una historia que ha marcado la vida de los miembros de la familia <strong>Brown</strong>. La presentadora <strong>Paula Ramírez</strong> introduce este reportaje advirtiendo sobre el contenido sensible y de carácter escatológico de los testimonios, los cuales se presentan bajo un estricto contexto periodístico. La historia se centra en una experiencia vivida por la familia en otra ciudad, concretamente en <strong>Detroit</strong>, que resultó en su desierro del barrio y una posterior mudanza. Según el relato, todo comenzó tras una situación de confusión bajo los efectos de sustancias que provocaron paranoias severas, derivando en actos que involucraron a varios miembros de la familia en un escenario de absoluto descontrol.<br><br><strong>UN ENCUENTRO FAMILIAR CON DESENLACE CAÓTICO</strong><br>El núcleo del testimonio describe un incidente en el que varios primos se vieron envueltos en comportamientos extraños, incluyendo descripciones sobre cómo se restregaron suciedad y restos por el cuerpo, asemejándose a animales en el lodo. La situación alcanzó su punto crítico cuando el tío de la familia descubrió el panorama, encontrando a sus sobrinos y a su propia hija en esa situación. Ante el choque, los involucrados emprendieron la huida, pero el daño ya estaba hecho: uno de los miembros de la familia salió a la calle cubierto de suciedad, lo que provocó que en el barrio comenzaran a llamarla <strong>Brown</strong>. Este apodo y el escándalo social resultante fueron los motivos principales por los que la familia fue desterrada de su comunidad original.<br><br><strong>CONTRASTE DE INFORMACIÓN EN DETROIT</strong><br>El equipo de <strong>Las Venturas News</strong> se trasladó hasta <strong>Detroit</strong> para localizar a <strong>Micaela Brown</strong> y contrastar las versiones ofrecidas previamente por <strong>Byron</strong> y <strong>Michael Brown</strong>. En una entrevista marcada por el silencio y la tensión, Micaela confirmó que la historia es real, aunque evitó entrar en detalles profundos sobre lo que más o menos le gustó de aquella noche. El reportaje destaca cómo el apodo de Brown todavía la persigue por la calle hoy en día. Con este episodio, el informativo busca mostrar las realidades más crudas y a veces incómodas de los ciudadanos, reafirmando su compromiso con un periodismo que no teme investigar las historias más turbias y personales.",
+        videoId: "pNyqOBgEd5E",
+        fecha: "15 de diciembre del 2025"
+    },
+    {
+        id: 8,
+        programaId: 4,
+        titulo: "ESPECIAL NAVIDAD - DISCURSO DEL GOBIERNO DE LAS VENTURAS",
+        descripcion: "<strong>MENSAJE INSTITUCIONAL: DISCURSO DE NAVIDAD DEL GOBIERNO DE LAS VENTURAS</strong><br>En esta emisión especial de <strong>Las Venturas News</strong>, compartimos íntegramente el mensaje dirigido a la nación por parte del <strong>Gobierno de Las Venturas</strong> con motivo de las fiestas decembrinas. El discurso comienza con una llamada a la reflexión sobre lo esencial, poniendo el foco en los hogares donde se comparten conversaciones, recuerdos y silencios que definen la identidad de nuestra sociedad. Se plantea la Navidad como una oportunidad anual para detenerse y cuestionar no solo quiénes somos, sino hacia dónde queremos dirigirnos como comunidad.<br><br><strong>RECONOCIMIENTO A LA RESILIENCIA CIUDADANA</strong><br>El representante gubernamental reconoce que los tiempos recientes no han sido fáciles, mencionando las incertidumbres y los esfuerzos silenciosos que muchos ciudadanos han tenido que afrontar. No obstante, destaca que la mayor fortaleza de <strong>Las Venturas</strong> no reside en los bienes materiales, sino en la calidad humana de sus habitantes. Se subraya la capacidad de la población para levantarse ante las adversidades, cuidarse mutuamente y persistir ante las decisiones difíciles, señalando estos valores como el motor principal de la ciudad.<br><br><strong>HACIA UN 2026 BASADO EN LA UNIÓN Y EL RESPETO</strong><br>De cara al nuevo año <strong>2026</strong>, el Gobierno enfatiza que el progreso no debe edificarse desde la división ni el ruido, sino a través del respeto, el diálogo y el compromiso compartido. Se reconoce que, aunque los cambios pueden generar miedo, representan una oportunidad de mejora necesaria para la evolución de la ciudad. El mensaje concluye con una expresión de gratitud hacia todos los ciudadanos por formar parte de <strong>Las Venturas</strong>, reafirmando la convicción de que la unión hace a la sociedad más fuerte. El discurso finaliza con el tradicional deseo de una feliz Navidad y un próspero año nuevo, transmitiendo un sentimiento de orgullo y satisfacción por el camino recorrido juntos.",
+        videoId: "trcuuXKWbbQ",
+        fecha: "24 de diciembre del 2025"
+    },
+    {
+        id: 9,
+        programaId: 3,
+        titulo: "PUBLICIDAD - HAY ALGO QUE TE QUIERO DECIR",
+        descripcion: "<strong>PUBLICIDAD: HAY ALGO QUE TE QUIERO DECIR</strong><br><strong>Las Venturas News</strong> presenta su nuevo y rompedor formato de entretenimiento: <strong>Hay algo que te quiero decir</strong>. Olvida los programas sentimentales convencionales; este espacio nace con el objetivo de liarla con estilo y provocar situaciones tan divertidas como surrealistas. La propuesta es clara: traer al plató a cualquier persona para soltarle verdades innecesarias, confesiones absurdas o bromas perfectamente planeadas. Ya sea para decirle a un colega que ronca como un tractor, devolverle una sudadera olvidada a un ex o simplemente para disfrutar de la cara de alguien al abrir el sobre, este programa promete ser el momento más incómodo y cómico del día.<br><br><strong>CONFESIONES ABSURDAS Y MOMENTOS INCÓMODOS</strong><br>Durante el avance, algunos ciudadanos ya han compartido los motivos por los que traerían a sus conocidos. Un testimonio anónimo confiesa que quiere traer a un amigo al que llama corazón simplemente porque ha olvidado su nombre real, que cree que es <strong>Federico</strong>, tras meses de amistad. Otro participante planea traer a su amigo <strong>Eustaquio</strong> para decirle la verdad que lleva tiempo ocultando: que canta fatal y que es muy incómodo fingir que lo hace bien. El programa se define como un lugar para reír, provocar y descolocar a los invitados. En <strong>Hay algo que te quiero decir</strong>, si el mensaje es una tontería, mejor; lo importante es abrir el sobre y asumir las consecuencias del momento.",
+        videoId: "vKABhU11xKU",
+        fecha: "15 de enero del 2026"
     }
 
 ];
@@ -81,8 +105,14 @@ function parsearFechaEspañola(fechaStr) {
         'septiembre': 8, 'octubre': 9, 'noviembre': 10, 'diciembre': 11
     };
 
-    // Formato esperado: "DD de Mes del YYYY"
-    const partes = fechaStr.toLowerCase().match(/(\d+)\s+de\s+(\w+)\s+del\s+(\d+)/);
+    // Intentar formato: "DD de Mes del YYYY"
+    let partes = fechaStr.toLowerCase().match(/(\d+)\s+de\s+(\w+)\s+del\s+(\d+)/);
+
+    // Si no coincide, intentar formato: "DD Mes del YYYY" (sin "de")
+    if (!partes) {
+        partes = fechaStr.toLowerCase().match(/(\d+)\s+(\w+)\s+del\s+(\d+)/);
+    }
+
     if (partes) {
         const dia = parseInt(partes[1]);
         const mes = meses[partes[2]];
@@ -159,18 +189,19 @@ function renderizarEpisodios(programaId = null, orden = 'reciente') {
 
     // Generar HTML para cada episodio
     contenedor.innerHTML = episodiosFiltrados.map((episodio, index) => `
-        <a href="episodio.html?id=${episodio.id}" class="group block">
-            <div class="bg-white rounded-xl shadow-md overflow-hidden animate__animated animate__fadeInUp hover:shadow-xl transition-shadow duration-300" 
+        <a href="episodio.html?id=${episodio.id}" class="group block h-full">
+            <div class="bg-white rounded-xl shadow-md overflow-hidden animate__animated animate__fadeInUp hover:shadow-xl transition-shadow duration-300 h-full flex flex-col" 
                  style="animation-delay: ${index * 0.1}s;">
-                <div class="aspect-video bg-black relative overflow-hidden">
+                <div class="aspect-video bg-black relative overflow-hidden flex-shrink-0">
                     <img src="https://img.youtube.com/vi/${episodio.videoId}/maxresdefault.jpg" 
                          alt="${episodio.titulo}"
-                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                         onerror="this.src='https://img.youtube.com/vi/${episodio.videoId}/hqdefault.jpg'">
                     <!-- Overlay sutil al hacer hover -->
                     <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all"></div>
                 </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-800 group-hover:text-red-600 transition mb-2">
+                <div class="p-6 flex-1 flex flex-col">
+                    <h3 class="text-xl font-bold text-gray-800 group-hover:text-red-600 transition mb-2 flex-1">
                         ${episodio.titulo}
                     </h3>
                     <p class="text-gray-500 text-sm italic">Emitido el ${episodio.fecha}</p>

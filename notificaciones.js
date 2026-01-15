@@ -7,6 +7,13 @@
  * y muestra una notificación si no se ha visto antes
  */
 function verificarNuevosEpisodios() {
+    // Si acabas de venir de una notificación, no mostrar otra inmediatamente
+    if (sessionStorage.getItem('lvn_desde_notificacion') === 'true') {
+        // Limpiar el flag para que en la próxima página sí se muestren
+        sessionStorage.removeItem('lvn_desde_notificacion');
+        return;
+    }
+
     // Obtener la fecha actual
     const ahora = new Date();
     const hace7Dias = new Date();
@@ -188,6 +195,11 @@ function calcularTiempoDesdePublicacion(fechaStr) {
  */
 function irAlEpisodio(episodioId) {
     marcarEpisodioComoVisto(episodioId);
+
+    // Marcar en sessionStorage que venimos de una notificación
+    // para evitar que salte otra notificación inmediatamente al entrar
+    sessionStorage.setItem('lvn_desde_notificacion', 'true');
+
     window.location.href = `episodio.html?id=${episodioId}`;
 }
 
