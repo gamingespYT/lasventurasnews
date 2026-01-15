@@ -120,18 +120,32 @@ function renderizarEpisodios(programaId = null, orden = 'reciente') {
     const contenedor = document.getElementById('episodios-container');
     if (!contenedor) return;
 
+    // Validar que el programaId sea válido si se proporciona
+    if (programaId !== null) {
+        // Si el ID es inválido (no es un número válido), redirigir a 404
+        if (isNaN(programaId) || programaId <= 0) {
+            window.location.href = '404.html';
+            return;
+        }
+    }
+
     // Actualizar el banner del programa (necesita acceso al array programas)
     if (programaId && typeof programas !== 'undefined') {
         const programa = programas.find(p => p.id === programaId);
-        if (programa) {
-            const bannerTitulo = document.getElementById('programa-titulo');
-            const bannerSubtitulo = document.getElementById('programa-subtitulo');
-            const bannerImagen = document.getElementById('programa-imagen');
 
-            if (bannerTitulo) bannerTitulo.textContent = programa.nombre;
-            if (bannerSubtitulo) bannerSubtitulo.textContent = programa.descripcion.toUpperCase();
-            if (bannerImagen) bannerImagen.src = programa.imagen.replace('w=800', 'w=1200');
+        // Si el programa no existe, redirigir a 404
+        if (!programa) {
+            window.location.href = '404.html';
+            return;
         }
+
+        const bannerTitulo = document.getElementById('programa-titulo');
+        const bannerSubtitulo = document.getElementById('programa-subtitulo');
+        const bannerImagen = document.getElementById('programa-imagen');
+
+        if (bannerTitulo) bannerTitulo.textContent = programa.nombre;
+        if (bannerSubtitulo) bannerSubtitulo.textContent = programa.descripcion.toUpperCase();
+        if (bannerImagen) bannerImagen.src = programa.imagen.replace('w=800', 'w=1200');
     }
 
     // Filtrar episodios por programa si se especifica
@@ -205,11 +219,20 @@ function cargarDetalleEpisodio() {
     const urlParams = new URLSearchParams(window.location.search);
     const episodioId = parseInt(urlParams.get('id'));
 
-    if (!episodioId) return;
+    // Si no hay ID o es inválido, redirigir a 404
+    if (!episodioId || isNaN(episodioId)) {
+        window.location.href = '404.html';
+        return;
+    }
 
     // Buscar el episodio
     const episodio = episodios.find(ep => ep.id === episodioId);
-    if (!episodio) return;
+
+    // Si el episodio no existe, redirigir a 404
+    if (!episodio) {
+        window.location.href = '404.html';
+        return;
+    }
 
     // Obtener el nombre del programa desde el array programas
     const programa = typeof programas !== 'undefined'
