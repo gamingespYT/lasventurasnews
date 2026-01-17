@@ -12,15 +12,15 @@ const programas = [
         animacion: "animate__fadeInLeft",
         color: "#dc2626" // Rojo
     },
-    {
-        id: 2,
-        nombre: "¿Quién Sabe Más?",
-        descripcion: "Concurso de Cultura General",
-        imagen: "https://gamingespyt.github.io/lasventurasnews/img/quien_sabe_mas.png",
-        url: "programa.html?id=2",
-        animacion: "animate__fadeInRight",
-        color: "#2563eb" // Azul
-    },
+    // {
+    //     id: 2,
+    //     nombre: "¿Quién Sabe Más?",
+    //     descripcion: "Concurso de Cultura General",
+    //     imagen: "https://gamingespyt.github.io/lasventurasnews/img/quien_sabe_mas.png",
+    //     url: "programa.html?id=2",
+    //     animacion: "animate__fadeInRight",
+    //     color: "#2563eb" // Azul
+    // },
     {
         id: 3,
         nombre: "Hay Algo Que Te Quiero Decir",
