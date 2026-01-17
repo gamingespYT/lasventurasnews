@@ -95,7 +95,7 @@ function mostrarNotificacionEpisodio(episodio) {
                         </svg>
                     </button>
                 </div>
-                <p class="text-red-100 text-sm mt-1">Publicado hace ${calcularTiempoDesdePublicacion(episodio.fecha)}</p>
+                <p class="text-red-100 text-sm mt-1">${obtenerTextoPublicacion(episodio.fecha)}</p>
             </div>
 
             <!-- Contenido del popup -->
@@ -174,19 +174,19 @@ function mostrarNotificacionEpisodio(episodio) {
 }
 
 /**
- * Calcula el tiempo transcurrido desde la publicación
+ * Obtiene el texto completo de publicación con gramática correcta
  * @param {string} fechaStr - Fecha en formato español
- * @returns {string} - Texto descriptivo del tiempo transcurrido
+ * @returns {string} - Texto completo "Publicado hoy", "Publicado ayer", etc.
  */
-function calcularTiempoDesdePublicacion(fechaStr) {
+function obtenerTextoPublicacion(fechaStr) {
     const fechaEpisodio = parsearFechaEspañola(fechaStr);
     const ahora = new Date();
     const diferenciaDias = Math.floor((ahora - fechaEpisodio) / (1000 * 60 * 60 * 24));
 
-    if (diferenciaDias === 0) return 'hoy';
-    if (diferenciaDias === 1) return 'ayer';
-    if (diferenciaDias < 7) return `hace ${diferenciaDias} días`;
-    return `hace ${Math.floor(diferenciaDias / 7)} semanas`;
+    if (diferenciaDias === 0) return 'Publicado hoy';
+    if (diferenciaDias === 1) return 'Publicado ayer';
+    if (diferenciaDias < 7) return `Publicado hace ${diferenciaDias} días`;
+    return `Publicado hace ${Math.floor(diferenciaDias / 7)} semanas`;
 }
 
 /**
