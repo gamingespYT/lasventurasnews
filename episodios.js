@@ -123,6 +123,75 @@ function parsearFechaEspañola(fechaStr) {
 }
 
 /**
+ * Actualiza dinámicamente el título y meta tags de la página
+ * @param {string} title - Título de la página
+ * @param {string} description - Descripción para meta tags
+ * @param {string} imageUrl - URL de la imagen para compartir (opcional)
+ */
+function updateMetaTags(title, description, imageUrl = null) {
+    // Actualizar título de la página
+    document.title = title;
+
+    // Actualizar meta description
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+        metaDescription.setAttribute('content', description);
+    }
+
+    // Actualizar Open Graph title
+    let ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) {
+        ogTitle.setAttribute('content', title);
+    }
+
+    // Actualizar Open Graph description
+    let ogDescription = document.querySelector('meta[property="og:description"]');
+    if (ogDescription) {
+        ogDescription.setAttribute('content', description);
+    }
+
+    // Actualizar Open Graph image
+    if (imageUrl) {
+        let ogImage = document.querySelector('meta[property="og:image"]');
+        if (ogImage) {
+            ogImage.setAttribute('content', imageUrl);
+        } else {
+            // Crear meta tag si no existe
+            ogImage = document.createElement('meta');
+            ogImage.setAttribute('property', 'og:image');
+            ogImage.setAttribute('content', imageUrl);
+            document.head.appendChild(ogImage);
+        }
+    }
+
+    // Actualizar Twitter title
+    let twitterTitle = document.querySelector('meta[name="twitter:title"]');
+    if (twitterTitle) {
+        twitterTitle.setAttribute('content', title);
+    }
+
+    // Actualizar Twitter description
+    let twitterDescription = document.querySelector('meta[name="twitter:description"]');
+    if (twitterDescription) {
+        twitterDescription.setAttribute('content', description);
+    }
+
+    // Actualizar Twitter image
+    if (imageUrl) {
+        let twitterImage = document.querySelector('meta[name="twitter:image"]');
+        if (twitterImage) {
+            twitterImage.setAttribute('content', imageUrl);
+        } else {
+            // Crear meta tag si no existe
+            twitterImage = document.createElement('meta');
+            twitterImage.setAttribute('name', 'twitter:image');
+            twitterImage.setAttribute('content', imageUrl);
+            document.head.appendChild(twitterImage);
+        }
+    }
+}
+
+/**
  * Ordena los episodios según el criterio seleccionado
  * @param {Array} episodios - Array de episodios a ordenar
  * @param {string} orden - 'reciente' o 'antiguo'
@@ -176,6 +245,11 @@ function renderizarEpisodios(programaId = null, orden = 'reciente') {
         if (bannerTitulo) bannerTitulo.textContent = programa.nombre;
         if (bannerSubtitulo) bannerSubtitulo.textContent = programa.descripcion.toUpperCase();
         if (bannerImagen) bannerImagen.src = programa.imagen.replace('w=800', 'w=1200');
+
+        // Actualizar meta tags con información del programa
+        const title = `${programa.nombre} | Las Venturas News`;
+        const description = `${programa.descripcion} - Todos los episodios de ${programa.nombre} en Las Venturas News.`;
+        updateMetaTags(title, description, programa.imagen);
     }
 
     // Filtrar episodios por programa si se especifica
@@ -304,4 +378,10 @@ function cargarDetalleEpisodio() {
     }
     if (fechaElement) fechaElement.textContent = episodio.fecha;
     if (descripcionElement) descripcionElement.innerHTML = episodio.descripcion;
+
+    // Actualizar título de la página y meta tags
+    const title = `${episodio.titulo} | Las Venturas News`;
+    const description = `${episodio.titulo} - Episodio de ${nombrePrograma}. ${episodio.fecha}. Las Venturas News, tu conexión con la ciudad.`;
+    const imageUrl = programa ? programa.imagen : null;
+    updateMetaTags(title, description, imageUrl);
 }
