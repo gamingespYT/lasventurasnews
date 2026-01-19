@@ -44,7 +44,6 @@
             position: relative;
             width: 100%;
             background: white;
-            border-radius: 8px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             overflow: hidden;
         }
@@ -55,8 +54,54 @@
             display: block;
         }
 
-        /* Mobile: altura fija con scroll permitido */
-        @media (max-width: 767px) {
+        /* Ocultar/mostrar iframes según dispositivo */
+        .calendar-mobile {
+            display: block;
+        }
+
+        .calendar-desktop {
+            display: none;
+        }
+
+        @media (min-width: 1024px) {
+            .calendar-mobile {
+                display: none;
+            }
+
+            .calendar-desktop {
+                display: block;
+            }
+        }
+
+        /* Móviles muy pequeños (< 375px) */
+        @media (max-width: 374px) {
+            .calendar-container {
+                height: 500px;
+                border-radius: 4px;
+                margin: 0 -1rem;
+                /* Compensar padding del contenedor */
+                width: calc(100% + 2rem);
+            }
+
+            .calendar-container iframe {
+                height: 500px;
+            }
+        }
+
+        /* Móviles pequeños (375px - 479px) */
+        @media (min-width: 375px) and (max-width: 479px) {
+            .calendar-container {
+                height: 550px;
+                border-radius: 6px;
+            }
+
+            .calendar-container iframe {
+                height: 550px;
+            }
+        }
+
+        /* Móviles medianos (480px - 767px) */
+        @media (min-width: 480px) and (max-width: 767px) {
             .calendar-container {
                 height: 600px;
                 border-radius: 6px;
@@ -67,10 +112,11 @@
             }
         }
 
-        /* Tablet: altura media-grande */
+        /* Tablet (768px - 1023px) */
         @media (min-width: 768px) and (max-width: 1023px) {
             .calendar-container {
                 height: 700px;
+                border-radius: 8px;
             }
 
             .calendar-container iframe {
@@ -78,7 +124,7 @@
             }
         }
 
-        /* Desktop: altura completa con responsive ratio */
+        /* Desktop (≥ 1024px) */
         @media (min-width: 1024px) {
             .calendar-container {
                 position: relative;
@@ -118,7 +164,14 @@
         <!-- Contenedor del calendario de Google -->
         <div class="max-w-6xl mx-auto animate__animated animate__fadeInUp">
             <div class="calendar-container">
-                <iframe
+                <!-- Calendario para móviles y tablets (sin título ni zona horaria) -->
+                <iframe class="calendar-mobile"
+                    src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FMadrid&showTitle=0&showTz=0&showTabs=1&showCalendars=0&src=YWFhYzNjMjFiMGMzOGZiOGE1MTZjNjhmYTA1YjFkYjJjYjliYWE1NmMyOGE4NDNmZjI2YWE1NTNmNGZkNDYzNEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23ef6c00"
+                    frameborder="0" scrolling="no" title="Calendario de Eventos de Las Venturas News">
+                </iframe>
+
+                <!-- Calendario para desktop (con título y zona horaria) -->
+                <iframe class="calendar-desktop"
                     src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FMadrid&showTabs=1&showCalendars=0&src=YWFhYzNjMjFiMGMzOGZiOGE1MTZjNjhmYTA1YjFkYjJjYjliYWE1NmMyOGE4NDNmZjI2YWE1NTNmNGZkNDYzNEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23ef6c00"
                     frameborder="0" scrolling="no" title="Calendario de Eventos de Las Venturas News">
                 </iframe>
