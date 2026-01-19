@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta Tags -->
+    <title>Calendario de Eventos | Las Venturas News</title>
+    <meta name="description"
+        content="Consulta el calendario de eventos de Las Venturas News. Mantente al día con todas nuestras emisiones, concursos y reportajes especiales.">
+    <meta name="keywords" content="calendario Las Venturas News, eventos, programación, emisiones, agenda">
+    <meta name="author" content="Las Venturas News">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gamingespyt.github.io/lasventurasnews/calendario.html">
+    <meta property="og:title" content="Calendario de Eventos | Las Venturas News">
+    <meta property="og:description"
+        content="Consulta el calendario de eventos de Las Venturas News. Mantente al día con todas nuestras emisiones.">
+    <meta property="og:image" content="https://gamingespyt.github.io/lasventurasnews/img/news.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://gamingespyt.github.io/lasventurasnews/calendario.html">
+    <meta property="twitter:title" content="Calendario de Eventos | Las Venturas News">
+    <meta property="twitter:description"
+        content="Consulta el calendario de eventos de Las Venturas News. Mantente al día con todas nuestras emisiones.">
+    <meta property="twitter:image" content="https://gamingespyt.github.io/lasventurasnews/img/news.png">
+
+    <!-- Favicon -->
+    <link rel="icon" href="img/logo.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Inter:wght@300;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="programas.js?v=1.2" defer></script>
+    <script src="header.js?v=1.2" defer></script>
+    <style>
+        .calendar-container {
+            position: relative;
+            width: 100%;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+        }
+
+        .calendar-container iframe {
+            width: 100%;
+            border: 0;
+            display: block;
+        }
+
+        /* Mobile: altura fija con scroll permitido */
+        @media (max-width: 767px) {
+            .calendar-container {
+                height: 600px;
+                border-radius: 6px;
+            }
+
+            .calendar-container iframe {
+                height: 600px;
+            }
+        }
+
+        /* Tablet: altura media-grande */
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .calendar-container {
+                height: 700px;
+            }
+
+            .calendar-container iframe {
+                height: 700px;
+            }
+        }
+
+        /* Desktop: altura completa con responsive ratio */
+        @media (min-width: 1024px) {
+            .calendar-container {
+                position: relative;
+                padding-bottom: 56.25%;
+                /* Ratio 16:9 */
+                height: 0;
+                border-radius: 12px;
+            }
+
+            .calendar-container iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body class="overflow-x-hidden bg-gray-100">
+
+    <!-- Header dinámico cargado desde header.js -->
+    <div id="header-container"></div>
+
+    <main class="container mx-auto px-4 py-12 md:py-16">
+        <div class="text-center mb-12 md:mb-16 animate__animated animate__fadeIn">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-oswald font-bold text-gray-900 mb-4 uppercase italic">
+                Calendario de Eventos
+            </h2>
+            <p class="text-gray-500 max-w-2xl mx-auto text-base md:text-lg px-4">
+                Mantente al día con todas nuestras emisiones, concursos y reportajes especiales.
+                Consulta aquí las fechas y horarios de nuestros programas.
+            </p>
+        </div>
+
+        <!-- Contenedor del calendario de Google -->
+        <div class="max-w-6xl mx-auto animate__animated animate__fadeInUp">
+            <div class="calendar-container">
+                <iframe
+                    src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FMadrid&showTabs=1&showCalendars=0&src=YWFhYzNjMjFiMGMzOGZiOGE1MTZjNjhmYTA1YjFkYjJjYjliYWE1NmMyOGE4NDNmZjI2YWE1NTNmNGZkNDYzNEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23ef6c00"
+                    frameborder="0" scrolling="no" title="Calendario de Eventos de Las Venturas News">
+                </iframe>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer dinámico cargado desde header.js -->
+    <div id="footer-container"></div>
+
+</body>
+
+</html>
