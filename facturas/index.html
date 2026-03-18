@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Factura - Las Venturas News</title>
+  <link rel="icon" href="../img/logo.png">
+  <link rel="stylesheet" href="factura.css">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+
+<body>
+  <a id="back-btn-home" href="../index.html" class="back-home" aria-label="Volver">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 16 16">
+      <path fill-rule="evenodd"
+        d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5M10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5" />
+    </svg>
+  </a>
+
+  <div class="invoice-container">
+    <div class="invoice-header">
+      <div class="logo-section">
+        <img src="../img/logo.png" alt="Las Venturas News" style="width: 60px; height: 60px; margin-bottom: 8px; border-radius: 8px;">
+        <h1>LAS VENTURAS <span>NEWS</span></h1>
+        <p class="subtitle">Canal de Noticias Oficial</p>
+      </div>
+      <div class="invoice-info">
+        <h2>FACTURA</h2>
+        <p><strong>Número:</strong> <span id="invoice-number"></span></p>
+        <p><strong>Fecha:</strong> <span id="invoice-date"></span></p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="customer-info">
+      <h3>Datos del Cliente</h3>
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="label">Nombre</span>
+          <span class="value" id="customer-name"></span>
+        </div>
+        <div class="info-item" id="org-row">
+          <span class="label">Organización</span>
+          <span class="value" id="customer-org"></span>
+        </div>
+        <div class="info-item">
+          <span class="label">Teléfono</span>
+          <span class="value" id="customer-phone"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="items-section">
+      <h3>Detalle de Servicios</h3>
+      <table class="items-table">
+        <thead>
+          <tr>
+            <th>Concepto</th>
+            <th>Precio</th>
+          </tr>
+        </thead>
+        <tbody id="items-body"></tbody>
+      </table>
+    </div>
+
+    <div class="totals-section">
+      <div class="total-row subtotal-row">
+        <span>Subtotal:</span>
+        <span id="subtotal-amount"></span>
+      </div>
+      <div class="total-row discount-row" id="discount-row" style="display: none;">
+        <span id="discount-label"></span>
+        <span id="discount-amount"></span>
+      </div>
+      <div class="total-row final-row">
+        <span>TOTAL:</span>
+        <span id="final-amount"></span>
+      </div>
+    </div>
+
+    <!-- Notas -->
+    <div id="notes-section" style="display: none; margin-bottom: 30px; background: #fffbeb; border-left: 3px solid #f59e0b; padding: 14px 18px; border-radius: 0 8px 8px 0;">
+      <p style="font-size: 0.75rem; color: #92400e; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 600;">Notas</p>
+      <p id="invoice-notes" style="font-size: 0.9rem; color: #78350f;"></p>
+    </div>
+
+    <div class="footer-section">
+      <p>Las Venturas News Media Group</p>
+    </div>
+
+    <div class="print-button-container">
+      <button id="save-btn" onclick="saveInvoiceManually()" class="save-btn" style="display: none;">💾 Guardar</button>
+      <button onclick="copyInvoiceCode()" class="code-btn">📋 Copiar Código</button>
+      <button onclick="downloadAsPNG()" class="png-btn">🖨️ Imprimir</button>
+      <button onclick="window.location.href='../facturas/'" class="back-btn">✖️ Cerrar</button>
+    </div>
+
+    <div id="code-notification" class="code-notification"></div>
+  </div>
+
+  <script src="../login/auth.js"></script>
+  <script src="factura.js"></script>
+  <script>
+    // Flecha volver: si está logueado → dashboard, si no → home
+    const backBtn = document.getElementById('back-btn-home');
+    if (backBtn) {
+      backBtn.href = (typeof Auth !== 'undefined' && Auth.isAuthenticated()) ? '../login/dashboard.html' : '../index.html';
+    }
+  </script>
+</body>
+
+</html>

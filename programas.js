@@ -3,15 +3,15 @@
 // ========================================
 
 const programas = [
-    {
-        id: 1,
-        nombre: "Noticiero",
-        descripcion: "Todas las noticias al alcance de la ciudadania",
-        imagen: "https://gamingespyt.github.io/lasventurasnews/img/news.png",
-        url: "programa.html?id=1",
-        animacion: "animate__fadeInLeft",
-        color: "#dc2626" // Rojo
-    },
+    // {
+    //     id: 1,
+    //     nombre: "Noticiero",
+    //     descripcion: "Todas las noticias al alcance de la ciudadania",
+    //     imagen: "https://gamingespyt.github.io/lasventurasnews/img/news.png",
+    //     url: "programa.html?id=1",
+    //     animacion: "animate__fadeInLeft",
+    //     color: "#dc2626" // Rojo
+    // },
     // {
     //     id: 2,
     //     nombre: "¿Quién Sabe Más?",
@@ -21,24 +21,24 @@ const programas = [
     //     animacion: "animate__fadeInRight",
     //     color: "#2563eb" // Azul
     // },
-    {
-        id: 3,
-        nombre: "Hay Algo Que Te Quiero Decir",
-        descripcion: "Historias reales de reencuentros emocionantes",
-        imagen: "https://gamingespyt.github.io/lasventurasnews/img/hay_algo_que_te_quiero_decir.png",
-        url: "programa.html?id=3",
-        animacion: "animate__fadeInLeft",
-        color: "#2563eb" // Azul
-    },
-    {
-        id: 4,
-        nombre: "Reportajes Especiales",
-        descripcion: "Programas o reportajes especiales",
-        imagen: "https://gamingespyt.github.io/lasventurasnews/img/reportaje_especial.png",
-        url: "programa.html?id=4",
-        animacion: "animate__fadeInRight",
-        color: "#26dc2fff" // Verde
-    },
+    // {
+    //     id: 3,
+    //     nombre: "Hay Algo Que Te Quiero Decir",
+    //     descripcion: "Historias reales de reencuentros emocionantes",
+    //     imagen: "https://gamingespyt.github.io/lasventurasnews/img/hay_algo_que_te_quiero_decir.png",
+    //     url: "programa.html?id=3",
+    //     animacion: "animate__fadeInLeft",
+    //     color: "#2563eb" // Azul
+    // },
+    // {
+    //     id: 4,
+    //     nombre: "Reportajes Especiales",
+    //     descripcion: "Programas o reportajes especiales",
+    //     imagen: "https://gamingespyt.github.io/lasventurasnews/img/reportaje_especial.png",
+    //     url: "programa.html?id=4",
+    //     animacion: "animate__fadeInRight",
+    //     color: "#26dc2fff" // Verde
+    // },
 ];
 
 // ========================================
@@ -51,6 +51,21 @@ const programas = [
 function renderizarProgramas() {
     const contenedor = document.getElementById('programas-container');
     if (!contenedor) return;
+
+    // Fallback si no hay programas activos
+    if (programas.length === 0) {
+        contenedor.innerHTML = `
+            <div class="col-span-full flex justify-center">
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg max-w-md w-full text-center p-12 animate__animated animate__fadeIn">
+                    <div class="text-6xl mb-4">📺</div>
+                    <h3 class="font-oswald text-3xl font-bold text-gray-800 mb-3 uppercase tracking-wide">Próximamente</h3>
+                    <div class="w-12 h-1 bg-red-600 mx-auto mb-4"></div>
+                    <p class="text-gray-500 text-sm leading-relaxed">Estamos preparando nuevos programas. ¡Mantente atento!</p>
+                </div>
+            </div>
+        `;
+        return;
+    }
 
     // Generar HTML para cada programa
     contenedor.innerHTML = programas.map((programa, index) => `

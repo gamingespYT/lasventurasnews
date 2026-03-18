@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta Tags -->
+    <title>Las Venturas News | Tu conexión con la ciudad</title>
+    <meta name="description"
+        content="Las Venturas News - El canal de noticias líder de Las Venturas. Información, reportajes especiales, concursos y entretenimiento. Tu conexión directa con la ciudad.">
+    <meta name="keywords"
+        content="Las Venturas News, noticias Las Venturas, noticiero, reportajes especiales, quién sabe más, concurso, entretenimiento">
+    <meta name="author" content="Las Venturas News">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gamingespyt.github.io/lasventurasnews/">
+    <meta property="og:title" content="Las Venturas News | Tu conexión con la ciudad">
+    <meta property="og:description"
+        content="El canal de noticias líder de Las Venturas. Información, reportajes especiales, concursos y entretenimiento.">
+    <meta property="og:image" content="https://gamingespyt.github.io/lasventurasnews/img/news.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://gamingespyt.github.io/lasventurasnews/">
+    <meta property="twitter:title" content="Las Venturas News | Tu conexión con la ciudad">
+    <meta property="twitter:description"
+        content="El canal de noticias líder de Las Venturas. Información, reportajes especiales, concursos y entretenimiento.">
+    <meta property="twitter:image" content="https://gamingespyt.github.io/lasventurasnews/img/news.png">
+
+    <!-- Favicon -->
+    <link rel="icon" href="img/logo.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Inter:wght@300;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="header.js?v=1.3" defer></script>
+    <script src="programas.js?v=1.3" defer></script>
+    <script src="episodios.js?v=1.4" defer></script>
+    <script src="notificaciones.js?v=1.3" defer></script>
+    <script src="script.js?v=1.3" defer></script>
+    <script src="guaguarp-popup.js"></script>
+</head>
+
+<body class="overflow-x-hidden bg-gray-100">
+
+    <!-- Header dinámico cargado desde header.js -->
+    <div id="header-container"></div>
+
+    <main class="container mx-auto px-4 py-12 md:py-16">
+        <div class="text-center mb-12 md:mb-16 animate__animated animate__fadeIn">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-oswald font-bold text-gray-900 mb-4 uppercase italic">Tu
+                conexión con la ciudad
+            </h2>
+            <p class="text-gray-500 max-w-2xl mx-auto text-base md:text-lg px-4">Selecciona uno de nuestros programas
+                para ver las últimas
+                emisiones y noticias exclusivas.</p>
+        </div>
+
+        <!-- Contenedor dinámico para programas -->
+        <div id="programas-container" class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 max-w-5xl mx-auto">
+            <!-- Los programas se cargarán aquí dinámicamente desde script.js -->
+        </div>
+    </main>
+
+    <!-- Footer dinámico cargado desde header.js -->
+    <div id="footer-container"></div>
+
+
+</body>
+
+</html>

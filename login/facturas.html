@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generar Facturas | Las Venturas News</title>
+    <meta name="description" content="Generador de facturas de Las Venturas News.">
+    <link rel="icon" href="../img/logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="login-bg min-h-screen flex flex-col">
+
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+
+        <!-- Header -->
+        <header class="w-full border-b border-white/10 backdrop-blur-md bg-white/5 sticky top-0 z-50">
+            <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+                <a href="dashboard.html" class="text-xl md:text-2xl font-bold tracking-tighter" style="font-family: 'Oswald', sans-serif;">
+                    <span class="text-white">LAS VENTURAS </span><span class="text-red-500">NEWS</span>
+                </a>
+                <div class="flex items-center gap-4">
+                    <a href="../facturas/" class="text-slate-400 hover:text-white text-sm transition flex items-center gap-1.5" style="font-family: 'Inter', sans-serif;">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                        Ver facturas
+                    </a>
+                    <a href="dashboard.html" class="text-slate-400 hover:text-white text-sm transition flex items-center gap-1.5" style="font-family: 'Inter', sans-serif;">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17l-5-5m0 0l5-5m-5 5h12"/>
+                        </svg>
+                        Panel
+                    </a>
+                    <button id="btn-logout" class="text-red-400 hover:text-red-300 text-sm transition flex items-center gap-1.5 cursor-pointer" style="font-family: 'Inter', sans-serif;">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                        </svg>
+                        Cerrar sesión
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Contenido principal -->
+        <main class="flex-1 w-full max-w-4xl mx-auto px-4 py-10 md:py-14">
+
+            <div class="fade-in mb-8">
+                <h1 class="text-2xl md:text-3xl font-bold text-white mb-2" style="font-family: 'Oswald', sans-serif;">
+                    GENERAR FACTURA
+                </h1>
+                <p class="text-slate-500 text-sm" style="font-family: 'Inter', sans-serif;">
+                    Completa los datos para generar una factura.
+                </p>
+                <div class="red-line mt-4" style="margin: 1rem 0 0 0;"></div>
+            </div>
+
+            <form id="factura-form" class="fade-in-delay space-y-6">
+
+                <!-- Datos del cliente -->
+                <div class="login-card p-6 md:p-8">
+                    <h2 class="text-white font-semibold text-sm uppercase tracking-wider mb-5 flex items-center gap-2" style="font-family: 'Oswald', sans-serif;">
+                        <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                        </svg>
+                        Datos del cliente
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-slate-400 text-xs font-medium mb-2 uppercase tracking-wider" style="font-family: 'Inter', sans-serif;">Nombre</label>
+                            <input type="text" id="cliente-nombre" class="login-input" style="padding-left: 1rem;" placeholder="Nombre del cliente" required>
+                        </div>
+                        <div>
+                            <label class="block text-slate-400 text-xs font-medium mb-2 uppercase tracking-wider" style="font-family: 'Inter', sans-serif;">Organización</label>
+                            <input type="text" id="cliente-organizacion" class="login-input" style="padding-left: 1rem;" placeholder="Empresa u organización (opcional)">
+                        </div>
+                        <div>
+                            <label class="block text-slate-400 text-xs font-medium mb-2 uppercase tracking-wider" style="font-family: 'Inter', sans-serif;">Teléfono</label>
+                            <input type="text" id="cliente-telefono" class="login-input" style="padding-left: 1rem;" placeholder="Número de teléfono">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conceptos -->
+                <div class="login-card p-6 md:p-8">
+                    <h2 class="text-white font-semibold text-sm uppercase tracking-wider mb-5 flex items-center gap-2" style="font-family: 'Oswald', sans-serif;">
+                        <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        Detalle de la factura
+                    </h2>
+
+                    <div id="items-container" class="space-y-3 mb-4">
+                        <div class="item-row grid grid-cols-[1fr_100px_auto] gap-3 items-end">
+                            <div>
+                                <label class="block text-slate-400 text-xs font-medium mb-2 uppercase tracking-wider" style="font-family: 'Inter', sans-serif;">Concepto</label>
+                                <input type="text" class="login-input item-concepto" style="padding-left: 1rem;" placeholder="Descripción del servicio" required>
+                            </div>
+                            <div>
+                                <label class="block text-slate-400 text-xs font-medium mb-2 uppercase tracking-wider" style="font-family: 'Inter', sans-serif;">Precio (€)</label>
+                                <input type="number" class="login-input item-precio" style="padding-left: 1rem;" placeholder="0" min="0" step="0.01" required>
+                            </div>
+                            <button type="button" class="btn-remove-item hidden text-red-400/50 hover:text-red-400 transition mb-1 p-2" title="Eliminar">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button type="button" id="btn-add-item" class="text-red-400 hover:text-red-300 text-sm transition flex items-center gap-1.5" style="font-family: 'Inter', sans-serif;">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                        </svg>
+                        Añadir concepto
+                    </button>
+
+                    <!-- Descuento -->
+                    <div class="mt-5 pt-5 border-t border-white/10">
+                        <label class="flex items-center gap-2 cursor-pointer select-none">
+                            <input type="checkbox" id="descuento-toggle" class="w-4 h-4 accent-red-500 cursor-pointer rounded">
+                            <span class="text-slate-400 text-xs font-medium uppercase tracking-wider" style="font-family: 'Inter', sans-serif;">Aplicar descuento</span>
+                        </label>
+                        <div id="descuento-wrapper" class="hidden mt-3 flex items-center gap-3 max-w-xs">
+                            <label class="block text-slate-400 text-xs font-medium uppercase tracking-wider whitespace-nowrap" style="font-family: 'Inter', sans-serif;">Descuento (%)</label>
+                            <input type="number" id="factura-descuento" class="login-input" style="padding-left: 1rem;" placeholder="0" min="0" max="100" step="1" value="0">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notas -->
+                <div class="login-card p-6 md:p-8">
+                    <h2 class="text-white font-semibold text-sm uppercase tracking-wider mb-5 flex items-center gap-2" style="font-family: 'Oswald', sans-serif;">
+                        <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/>
+                        </svg>
+                        Notas adicionales
+                    </h2>
+                    <textarea id="factura-notas" class="login-input" style="padding-left: 1rem; min-height: 80px; resize: vertical;" placeholder="Notas opcionales para la factura..."></textarea>
+                </div>
+
+                <button type="submit" class="login-btn">
+                    <span id="btn-text">GENERAR FACTURA</span>
+                </button>
+            </form>
+
+        </main>
+    </div>
+
+    <script src="auth.js"></script>
+    <script>
+        Auth.protegerPagina();
+
+        const itemsContainer = document.getElementById('items-container');
+        const btnAddItem = document.getElementById('btn-add-item');
+        const form = document.getElementById('factura-form');
+
+        // Añadir concepto
+        btnAddItem.addEventListener('click', () => {
+            const row = document.createElement('div');
+            row.className = 'item-row grid grid-cols-[1fr_100px_auto] gap-3 items-end';
+            row.innerHTML = `
+                <div>
+                    <input type="text" class="login-input item-concepto" style="padding-left: 1rem;" placeholder="Descripción del servicio" required>
+                </div>
+                <div>
+                    <input type="number" class="login-input item-precio" style="padding-left: 1rem;" placeholder="0" min="0" step="0.01" required>
+                </div>
+                <button type="button" class="btn-remove-item text-red-400/50 hover:text-red-400 transition mb-1 p-2" title="Eliminar">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                    </svg>
+                </button>
+            `;
+            itemsContainer.appendChild(row);
+            updateRemoveButtons();
+        });
+
+        // Eliminar concepto
+        itemsContainer.addEventListener('click', (e) => {
+            const btn = e.target.closest('.btn-remove-item');
+            if (btn) {
+                btn.closest('.item-row').remove();
+                updateRemoveButtons();
+            }
+        });
+
+        function updateRemoveButtons() {
+            const rows = itemsContainer.querySelectorAll('.item-row');
+            rows.forEach(row => {
+                const btn = row.querySelector('.btn-remove-item');
+                if (btn) btn.classList.toggle('hidden', rows.length <= 1);
+            });
+        }
+
+        // Toggle descuento
+        const descuentoToggle = document.getElementById('descuento-toggle');
+        const descuentoWrapper = document.getElementById('descuento-wrapper');
+        const descuentoInput = document.getElementById('factura-descuento');
+
+        descuentoToggle.addEventListener('change', () => {
+            descuentoWrapper.classList.toggle('hidden', !descuentoToggle.checked);
+            if (!descuentoToggle.checked) descuentoInput.value = 0;
+        });
+
+        // Generar factura → construir v2 compact y redirigir al visor
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('cliente-nombre').value.trim();
+            const org = document.getElementById('cliente-organizacion').value.trim();
+            const phone = document.getElementById('cliente-telefono').value.trim();
+            const discountPercent = parseFloat(descuentoInput.value) || 0;
+            const notes = document.getElementById('factura-notas').value.trim();
+
+            // Recoger items
+            const items = [];
+            itemsContainer.querySelectorAll('.item-row').forEach(row => {
+                const concepto = row.querySelector('.item-concepto').value.trim();
+                const precio = parseFloat(row.querySelector('.item-precio').value) || 0;
+                if (concepto && precio > 0) {
+                    items.push({ concepto, precio });
+                }
+            });
+
+            if (items.length === 0) return;
+
+            const total = items.reduce((sum, item) => sum + item.precio, 0);
+            const discount = Math.round((total * (discountPercent / 100)) * 100) / 100;
+            const finalTotal = Math.round((total - discount) * 100) / 100;
+
+            // Generar número de factura
+            const now = new Date();
+            const y = now.getFullYear();
+            const m = String(now.getMonth() + 1).padStart(2, '0');
+            const d = String(now.getDate()).padStart(2, '0');
+            const h = String(now.getHours()).padStart(2, '0');
+            const min = String(now.getMinutes()).padStart(2, '0');
+            const s = String(now.getSeconds()).padStart(2, '0');
+            const invoiceNumber = `LVN-${y}${m}${d}-${h}${min}${s}`;
+
+            // Construir v2 compact
+            const dateMs = Date.now();
+            const itemsStr = items.map(it => `${encodeURIComponent(it.concepto)}~${it.precio}`).join(',');
+            const compact = [
+                dateMs,
+                encodeURIComponent(name),
+                encodeURIComponent(org),
+                encodeURIComponent(phone),
+                total,
+                discount,
+                discountPercent,
+                finalTotal,
+                invoiceNumber,
+                encodeURIComponent(notes),
+                itemsStr
+            ].join('|');
+
+            const code = encodeURIComponent(compact);
+
+            // Redirigir al visor de facturas
+            window.location.href = `../facturas/?data=${code}&src=gen`;
+        });
+
+        // Logout
+        document.getElementById('btn-logout').addEventListener('click', () => {
+            Auth.logout();
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+
+</html>
