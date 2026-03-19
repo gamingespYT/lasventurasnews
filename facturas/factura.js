@@ -58,8 +58,8 @@ function getInvoiceData() {
   }
 }
 
-// Parseador del formato compacto v2
-// Formato: dateMs|name|org|phone|total|discount|discountPercent|finalTotal|invoiceNumber|notes|item1Concepto~item1Precio,item2Concepto~item2Precio
+// Parseador del formato compacto
+// Formato: dateMs|name|org|phone|total|discount|discountPercent|finalTotal|invoiceNumber|notes|items|discountMode
 function parseCompactInvoice(compact) {
   const parts = compact.split('|');
   try {
@@ -74,6 +74,7 @@ function parseCompactInvoice(compact) {
     const invoiceNumber = parts[8] || '';
     const notes = decodeURIComponent(parts[9] || '');
     const itemsRaw = parts[10] || '';
+    const discountMode = parts[11] || 'p'; // 'p' = porcentaje, 'f' = cantidad fija
 
     const items = itemsRaw.length === 0 ? [] : itemsRaw.split(',').map(it => {
       const f = it.split('~');
@@ -86,7 +87,7 @@ function parseCompactInvoice(compact) {
     return {
       date: new Date(dateMs).toISOString(),
       name, org, phone, items, total,
-      discount, discountPercent, finalTotal,
+      discount, discountPercent, discountMode, finalTotal,
       invoiceNumber, notes
     };
   } catch (e) {
@@ -113,7 +114,8 @@ function buildCompactInvoice(data) {
     data.finalTotal || 0,
     data.invoiceNumber || '',
     encodeURIComponent(data.notes || ''),
-    itemsStr
+    itemsStr,
+    data.discountMode || 'p'
   ].join('|');
 
   return encodeURIComponent(compact);
@@ -513,7 +515,11 @@ function populateInvoice() {
 
   if (data.discount && data.discount > 0) {
     document.getElementById('discount-row').style.display = 'flex';
-    document.getElementById('discount-label').textContent = `Descuento (${data.discountPercent || 0}%):`;
+    if (data.discountMode === 'f') {
+      document.getElementById('discount-label').textContent = 'Descuento:';
+    } else {
+      document.getElementById('discount-label').textContent = `Descuento (${data.discountPercent || 0}%):`;
+    }
     document.getElementById('discount-amount').textContent = `-${(data.discount || 0).toLocaleString('es-ES', { minimumFractionDigits: 2 })}€`;
   }
 

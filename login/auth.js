@@ -8,7 +8,7 @@ const Auth = (() => {
 
     // Usuarios válidos del sistema
     const USUARIOS = [
-        { id: 1, usuario: 'admin', password: 'admin123', nombre: 'Josep Arias', rol: 'Admin' }
+        { id: 1, usuario: 'jarias', password: 'lasventurasnews', nombre: 'Josep Arias', rol: 'Admin' }
     ];
 
     /**

@@ -128,9 +128,14 @@
                             <input type="checkbox" id="descuento-toggle" class="w-4 h-4 accent-red-500 cursor-pointer rounded">
                             <span class="text-slate-400 text-xs font-medium uppercase tracking-wider" style="font-family: 'Inter', sans-serif;">Aplicar descuento</span>
                         </label>
-                        <div id="descuento-wrapper" class="hidden mt-3 flex items-center gap-3 max-w-xs">
-                            <label class="block text-slate-400 text-xs font-medium uppercase tracking-wider whitespace-nowrap" style="font-family: 'Inter', sans-serif;">Descuento (%)</label>
-                            <input type="number" id="factura-descuento" class="login-input" style="padding-left: 1rem;" placeholder="0" min="0" max="100" step="1" value="0">
+                        <div id="descuento-wrapper" class="hidden mt-3 flex items-center gap-3 max-w-sm">
+                            <div class="flex rounded-lg overflow-hidden border border-white/10 flex-shrink-0">
+                                <button type="button" id="mode-percent" class="descuento-mode-btn px-3 py-2 text-xs font-bold transition" style="background: rgba(220,38,38,0.3); color: #fca5a5; font-family: 'Inter', sans-serif;">%</button>
+                                <button type="button" id="mode-fixed" class="descuento-mode-btn px-3 py-2 text-xs font-bold transition" style="background: transparent; color: #64748b; font-family: 'Inter', sans-serif;">€</button>
+                            </div>
+                            <label id="descuento-label" class="block text-slate-400 text-xs font-medium uppercase tracking-wider whitespace-nowrap" style="font-family: 'Inter', sans-serif;">Descuento (%)</label>
+                            <input type="number" id="factura-descuento" class="login-input" style="padding-left: 1rem;" placeholder="0" min="0" step="0.01" value="0">
+                            <input type="hidden" id="descuento-mode" value="p">
                         </div>
                     </div>
                 </div>
@@ -154,7 +159,7 @@
         </main>
     </div>
 
-    <script src="auth.js"></script>
+    <script src="auth.js?v=1.0"></script>
     <script>
         Auth.protegerPagina();
 
@@ -204,11 +209,39 @@
         const descuentoToggle = document.getElementById('descuento-toggle');
         const descuentoWrapper = document.getElementById('descuento-wrapper');
         const descuentoInput = document.getElementById('factura-descuento');
+        const descuentoMode = document.getElementById('descuento-mode');
+        const descuentoLabel = document.getElementById('descuento-label');
+        const modePercent = document.getElementById('mode-percent');
+        const modeFixed = document.getElementById('mode-fixed');
 
         descuentoToggle.addEventListener('change', () => {
             descuentoWrapper.classList.toggle('hidden', !descuentoToggle.checked);
             if (!descuentoToggle.checked) descuentoInput.value = 0;
         });
+
+        function setDiscountMode(mode) {
+            descuentoMode.value = mode;
+            if (mode === 'p') {
+                descuentoLabel.textContent = 'Descuento (%)';
+                descuentoInput.max = '100';
+                descuentoInput.step = '1';
+                modePercent.style.background = 'rgba(220,38,38,0.3)';
+                modePercent.style.color = '#fca5a5';
+                modeFixed.style.background = 'transparent';
+                modeFixed.style.color = '#64748b';
+            } else {
+                descuentoLabel.textContent = 'Descuento (€)';
+                descuentoInput.removeAttribute('max');
+                descuentoInput.step = '0.01';
+                modeFixed.style.background = 'rgba(220,38,38,0.3)';
+                modeFixed.style.color = '#fca5a5';
+                modePercent.style.background = 'transparent';
+                modePercent.style.color = '#64748b';
+            }
+        }
+
+        modePercent.addEventListener('click', () => setDiscountMode('p'));
+        modeFixed.addEventListener('click', () => setDiscountMode('f'));
 
         // Generar factura → construir v2 compact y redirigir al visor
         form.addEventListener('submit', (e) => {
@@ -217,7 +250,8 @@
             const name = document.getElementById('cliente-nombre').value.trim();
             const org = document.getElementById('cliente-organizacion').value.trim();
             const phone = document.getElementById('cliente-telefono').value.trim();
-            const discountPercent = parseFloat(descuentoInput.value) || 0;
+            const discountValue = parseFloat(descuentoInput.value) || 0;
+            const dMode = descuentoMode.value; // 'p' or 'f'
             const notes = document.getElementById('factura-notas').value.trim();
 
             // Recoger items
@@ -233,7 +267,14 @@
             if (items.length === 0) return;
 
             const total = items.reduce((sum, item) => sum + item.precio, 0);
-            const discount = Math.round((total * (discountPercent / 100)) * 100) / 100;
+            let discount, discountPercent;
+            if (dMode === 'p') {
+                discountPercent = discountValue;
+                discount = Math.round((total * (discountPercent / 100)) * 100) / 100;
+            } else {
+                discount = discountValue;
+                discountPercent = total > 0 ? Math.round((discount / total) * 10000) / 100 : 0;
+            }
             const finalTotal = Math.round((total - discount) * 100) / 100;
 
             // Generar número de factura
@@ -260,7 +301,8 @@
                 finalTotal,
                 invoiceNumber,
                 encodeURIComponent(notes),
-                itemsStr
+                itemsStr,
+                dMode
             ].join('|');
 
             const code = encodeURIComponent(compact);
