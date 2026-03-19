@@ -27,7 +27,6 @@ function renderizarHeader() {
                     <nav class="hidden lg:flex space-x-6 font-medium text-gray-600">
                         <a href="index.html" class="hover:text-red-600 transition">Inicio</a>
                         ${programas.map(p => `<a href="${p.url}" class="hover:text-red-600 transition">${p.nombre}</a>`).join('')}
-                        <a href="calendario.html" class="hover:text-red-600 transition">Calendario</a>
                     </nav>
                     
                     <!-- Botón hamburguesa móvil/tablet -->
@@ -62,9 +61,6 @@ function renderizarHeader() {
                         Inicio
                     </a>
                     ${enlacesProgramas}
-                    <a href="calendario.html" class="mobile-menu-link hover:bg-red-50 hover:text-red-600 transition px-6 py-4 block border-b border-gray-100 font-medium text-gray-700">
-                        Calendario
-                    </a>
                 </div>
                 
                 <!-- Footer del menú lateral -->
@@ -141,7 +137,6 @@ function renderizarFooter() {
                         <ul class="space-y-2 text-gray-400 text-sm">
                             <li><a href="index.html" class="hover:text-red-500 transition">Inicio</a></li>
                             ${programas.map(p => `<li><a href="${p.url}" class="hover:text-red-500 transition">${p.nombre}</a></li>`).join('')}
-                            <li><a href="calendario.html" class="hover:text-red-500 transition">Calendario</a></li>
                             <li><a href="facturas/" class="hover:text-red-500 transition">Facturas</a></li>
                             <li><a href="login/" class="hover:text-red-500 transition">Iniciar sesión</a></li>
                         </ul>

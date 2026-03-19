@@ -581,7 +581,7 @@ function showCodeNotification(message, type) {
   setTimeout(() => notification.classList.remove('show'), 4000);
 }
 
-// Descargar como PNG
+// Descargar como PNG (tamaño mínimo A4)
 async function downloadAsPNG() {
   const container = document.querySelector('.invoice-container');
   const buttons = document.querySelector('.print-button-container');
@@ -594,18 +594,52 @@ async function downloadAsPNG() {
 
   showCodeNotification('⏳ Generando imagen...', 'success');
 
+  // Dimensiones A4 a 96 DPI (px)
+  const A4_W = 794;
+  const A4_H = 1123;
+  const SCALE = 2;
+
+  // Guardar estilos originales del contenedor
+  const origMinWidth = container.style.minWidth;
+  const origMinHeight = container.style.minHeight;
+  const origWidth = container.style.width;
+  const origBorderRadius = container.style.borderRadius;
+
+  // Forzar dimensiones mínimas A4 y quitar border-radius para la captura
+  container.style.minWidth = A4_W + 'px';
+  container.style.minHeight = A4_H + 'px';
+  container.style.width = A4_W + 'px';
+  container.style.borderRadius = '0';
+
   try {
-    await new Promise(resolve => setTimeout(resolve, 100));
+    await new Promise(resolve => setTimeout(resolve, 150));
 
     const canvas = await html2canvas(container, {
-      scale: 2,
+      scale: SCALE,
       backgroundColor: '#ffffff',
       logging: false,
       useCORS: true,
       allowTaint: true
     });
 
-    canvas.toBlob((blob) => {
+    // Asegurar que el canvas final tenga al menos tamaño A4 × SCALE
+    const minW = A4_W * SCALE;
+    const minH = A4_H * SCALE;
+    let finalCanvas = canvas;
+
+    if (canvas.width < minW || canvas.height < minH) {
+      finalCanvas = document.createElement('canvas');
+      finalCanvas.width = Math.max(canvas.width, minW);
+      finalCanvas.height = Math.max(canvas.height, minH);
+      const ctx = finalCanvas.getContext('2d');
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, finalCanvas.width, finalCanvas.height);
+      // Centrar el contenido horizontalmente, alinear arriba
+      const offsetX = Math.round((finalCanvas.width - canvas.width) / 2);
+      ctx.drawImage(canvas, offsetX, 0);
+    }
+
+    finalCanvas.toBlob((blob) => {
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.download = `Factura_${document.getElementById('invoice-number').textContent}.png`;
@@ -619,6 +653,11 @@ async function downloadAsPNG() {
     console.error('Error al generar PNG:', error);
     showCodeNotification('❌ Error al generar imagen', 'error');
   } finally {
+    // Restaurar estilos originales
+    container.style.minWidth = origMinWidth;
+    container.style.minHeight = origMinHeight;
+    container.style.width = origWidth;
+    container.style.borderRadius = origBorderRadius;
     buttons.style.display = 'flex';
     if (notification) notification.style.display = 'block';
     if (backHome) backHome.style.display = 'inline-flex';
