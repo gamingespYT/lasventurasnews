@@ -27,7 +27,7 @@
                     <span class="text-white">LAS VENTURAS </span><span class="text-red-500">NEWS</span>
                 </a>
                 <div class="flex items-center gap-4">
-                    <a href="../facturas/" class="text-slate-400 hover:text-white text-sm transition flex items-center gap-1.5" style="font-family: 'Inter', sans-serif;">
+                    <a href="./mis-facturas.html" class="text-slate-400 hover:text-white text-sm transition flex items-center gap-1.5" style="font-family: 'Inter', sans-serif;">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                         </svg>
@@ -88,7 +88,7 @@
                     </div>
                 </div>
 
-                <!-- Conceptos -->
+                <!-- Servicios -->
                 <div class="login-card p-6 md:p-8">
                     <h2 class="text-white font-semibold text-sm uppercase tracking-wider mb-5 flex items-center gap-2" style="font-family: 'Oswald', sans-serif;">
                         <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -100,7 +100,7 @@
                     <div id="items-container" class="space-y-3 mb-4">
                         <div class="item-row grid grid-cols-[1fr_100px_auto] gap-3 items-end">
                             <div>
-                                <label class="block text-slate-400 text-xs font-medium mb-2 uppercase tracking-wider" style="font-family: 'Inter', sans-serif;">Concepto</label>
+                                <label class="block text-slate-400 text-xs font-medium mb-2 uppercase tracking-wider" style="font-family: 'Inter', sans-serif;">Servicio</label>
                                 <input type="text" class="login-input item-concepto" style="padding-left: 1rem;" placeholder="Descripción del servicio" required>
                             </div>
                             <div>
@@ -119,7 +119,7 @@
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                         </svg>
-                        Añadir concepto
+                        Añadir servicio
                     </button>
 
                     <!-- Descuento -->
@@ -167,7 +167,7 @@
         const btnAddItem = document.getElementById('btn-add-item');
         const form = document.getElementById('factura-form');
 
-        // Añadir concepto
+        // Añadir servicio
         btnAddItem.addEventListener('click', () => {
             const row = document.createElement('div');
             row.className = 'item-row grid grid-cols-[1fr_100px_auto] gap-3 items-end';
@@ -188,7 +188,7 @@
             updateRemoveButtons();
         });
 
-        // Eliminar concepto
+        // Eliminar servicio
         itemsContainer.addEventListener('click', (e) => {
             const btn = e.target.closest('.btn-remove-item');
             if (btn) {

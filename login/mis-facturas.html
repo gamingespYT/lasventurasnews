@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Facturas | Las Venturas News</title>
+    <meta name="description" content="Consulta y gestiona tus facturas guardadas en Las Venturas News.">
+    <link rel="icon" href="../img/logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="login-bg min-h-screen flex flex-col">
+
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+
+        <!-- Header -->
+        <header class="w-full border-b border-white/10 backdrop-blur-md bg-white/5 sticky top-0 z-50">
+            <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+                <a href="dashboard.html" class="text-xl md:text-2xl font-bold tracking-tighter" style="font-family: 'Oswald', sans-serif;">
+                    <span class="text-white">LAS VENTURAS </span><span class="text-red-500">NEWS</span>
+                </a>
+                <div class="flex items-center gap-4">
+                    <a href="facturas.html" class="text-slate-400 hover:text-white text-sm transition flex items-center gap-1.5" style="font-family: 'Inter', sans-serif;">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                        </svg>
+                        Nueva factura
+                    </a>
+                    <a href="dashboard.html" class="text-slate-400 hover:text-white text-sm transition flex items-center gap-1.5" style="font-family: 'Inter', sans-serif;">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17l-5-5m0 0l5-5m-5 5h12"/>
+                        </svg>
+                        Panel
+                    </a>
+                    <button id="btn-logout" class="text-red-400 hover:text-red-300 text-sm transition flex items-center gap-1.5 cursor-pointer" style="font-family: 'Inter', sans-serif;">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                        </svg>
+                        Cerrar sesión
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Contenido principal -->
+        <main class="flex-1 w-full max-w-4xl mx-auto px-4 py-10 md:py-14">
+
+            <div class="fade-in mb-8">
+                <h1 class="text-2xl md:text-3xl font-bold text-white mb-2" style="font-family: 'Oswald', sans-serif;">
+                    MIS FACTURAS
+                </h1>
+                <p class="text-slate-500 text-sm" style="font-family: 'Inter', sans-serif;">
+                    Consulta, busca y gestiona tus facturas guardadas.
+                </p>
+                <div class="red-line mt-4" style="margin: 1rem 0 0 0;"></div>
+            </div>
+
+            <!-- Barra de búsqueda y acciones -->
+            <div class="fade-in-delay flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-6">
+                <div class="flex-1 relative">
+                    <svg class="w-4 h-4 text-slate-500 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                    <input type="text" id="search-input" class="login-input" style="padding-left: 2.75rem;" placeholder="Buscar por número, cliente u organización...">
+                </div>
+                <button id="btn-clear-all" class="px-5 py-3 rounded-xl border border-red-500/20 bg-red-600/10 text-red-400 text-sm font-semibold hover:bg-red-600/20 hover:border-red-500/30 transition flex items-center gap-2 justify-center cursor-pointer whitespace-nowrap" style="font-family: 'Inter', sans-serif;">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                    </svg>
+                    Borrar todas
+                </button>
+            </div>
+
+            <!-- Contador -->
+            <div class="fade-in-delay mb-4">
+                <p id="invoice-count" class="text-slate-600 text-xs uppercase tracking-wider font-medium" style="font-family: 'Inter', sans-serif;"></p>
+            </div>
+
+            <!-- Lista de facturas -->
+            <div id="invoices-list" class="fade-in-delay space-y-3">
+            </div>
+
+        </main>
+    </div>
+
+    <script src="auth.js?v=1.0"></script>
+    <script>
+        Auth.protegerPagina();
+
+        const STORAGE_PREFIX = 'lvn_invoice_';
+        const container = document.getElementById('invoices-list');
+        const searchInput = document.getElementById('search-input');
+        const countEl = document.getElementById('invoice-count');
+        let allInvoices = [];
+
+        function loadInvoices() {
+            allInvoices = [];
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith(STORAGE_PREFIX)) {
+                    try {
+                        const inv = JSON.parse(localStorage.getItem(key));
+                        inv._key = key;
+                        allInvoices.push(inv);
+                    } catch (e) { /* skip */ }
+                }
+            }
+            allInvoices.sort((a, b) => new Date(b.date) - new Date(a.date));
+        }
+
+        function fmtDate(dateStr) {
+            const d = new Date(dateStr);
+            return `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()} - ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+        }
+
+        function buildCompact(data) {
+            const dateMs = Date.parse(data.date) || Date.now();
+            const itemsStr = (data.items || []).map(it => `${encodeURIComponent(it.concepto || '')}~${it.precio || 0}`).join(',');
+            const compact = [dateMs, encodeURIComponent(data.name || ''), encodeURIComponent(data.org || ''), encodeURIComponent(data.phone || ''), data.total || 0, data.discount || 0, data.discountPercent || 0, data.finalTotal || 0, data.invoiceNumber || '', encodeURIComponent(data.notes || ''), itemsStr, data.discountMode || 'p'].join('|');
+            return encodeURIComponent(compact);
+        }
+
+        function renderInvoices(filter = '') {
+            const q = filter.toLowerCase().trim();
+            const filtered = q
+                ? allInvoices.filter(inv =>
+                    (inv.invoiceNumber || '').toLowerCase().includes(q) ||
+                    (inv.name || '').toLowerCase().includes(q) ||
+                    (inv.org || '').toLowerCase().includes(q)
+                )
+                : allInvoices;
+
+            countEl.textContent = `${filtered.length} factura${filtered.length !== 1 ? 's' : ''}${q ? ' encontrada' + (filtered.length !== 1 ? 's' : '') : ''}`;
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="login-card p-10 text-center">
+                        <svg class="w-14 h-14 mx-auto mb-4 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        <p class="text-slate-400 text-base font-medium mb-1" style="font-family: 'Oswald', sans-serif;">${q ? 'SIN RESULTADOS' : 'NO HAY FACTURAS'}</p>
+                        <p class="text-slate-600 text-sm" style="font-family: 'Inter', sans-serif;">${q ? 'No se encontraron facturas con esa búsqueda.' : 'Las facturas que generes aparecerán aquí.'}</p>
+                        ${!q ? '<a href="facturas.html" class="inline-flex items-center gap-1.5 text-red-400 text-sm mt-4 hover:text-red-300 transition" style="font-family: \'Inter\', sans-serif;">Crear primera factura <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a>' : ''}
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = filtered.map(inv => {
+                const code = buildCompact(inv);
+                const viewUrl = `../facturas/?data=${code}`;
+                const itemCount = (inv.items || []).length;
+                return `
+                    <div class="login-card group flex items-center gap-4 p-5 hover:border-white/15" style="border-radius: 1rem;">
+                        <a href="${viewUrl}" class="flex items-center gap-4 flex-1 min-w-0 no-underline">
+                            <div class="w-11 h-11 rounded-xl bg-amber-600/10 flex items-center justify-center flex-shrink-0 group-hover:bg-amber-600/20 transition">
+                                <svg class="w-5 h-5 text-amber-400/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                </svg>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center gap-2 mb-0.5">
+                                    <span class="text-white text-sm font-semibold truncate" style="font-family: 'Oswald', sans-serif; letter-spacing: 0.02em;">${inv.invoiceNumber}</span>
+                                    <span class="text-slate-600 text-[10px] px-1.5 py-0.5 rounded bg-white/5 border border-white/5 flex-shrink-0" style="font-family: 'Inter', sans-serif;">${itemCount} servicio${itemCount !== 1 ? 's' : ''}</span>
+                                </div>
+                                <p class="text-slate-500 text-xs truncate" style="font-family: 'Inter', sans-serif;">${inv.name}${inv.org ? ' · ' + inv.org : ''}</p>
+                                <p class="text-slate-600 text-[11px] mt-0.5" style="font-family: 'Inter', sans-serif;">${fmtDate(inv.date)}</p>
+                            </div>
+                            <div class="text-right flex-shrink-0">
+                                <span class="text-red-400 font-bold text-lg" style="font-family: 'Oswald', sans-serif;">${(inv.finalTotal || 0).toLocaleString('es-ES', { minimumFractionDigits: 2 })}€</span>
+                            </div>
+                        </a>
+                        <button onclick="deleteInvoice('${inv._key}')" class="text-slate-600 hover:text-red-400 transition p-2 rounded-lg hover:bg-red-600/10 flex-shrink-0 cursor-pointer" title="Eliminar factura">
+                            <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                            </svg>
+                        </button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function deleteInvoice(key) {
+            if (!confirm('¿Eliminar esta factura?')) return;
+            localStorage.removeItem(key);
+            loadInvoices();
+            renderInvoices(searchInput.value);
+        }
+
+        document.getElementById('btn-clear-all').addEventListener('click', () => {
+            if (allInvoices.length === 0) return;
+            if (!confirm('¿Borrar todas las facturas guardadas? Esta acción no se puede deshacer.')) return;
+            allInvoices.forEach(inv => localStorage.removeItem(inv._key));
+            loadInvoices();
+            renderInvoices(searchInput.value);
+        });
+
+        searchInput.addEventListener('input', () => {
+            renderInvoices(searchInput.value);
+        });
+
+        document.getElementById('btn-logout').addEventListener('click', () => {
+            Auth.logout();
+            window.location.href = 'index.html';
+        });
+
+        loadInvoices();
+        renderInvoices();
+    </script>
+</body>
+
+</html>
