@@ -8,9 +8,9 @@
  */
 function verificarNuevosEpisodios() {
     // Si acabas de venir de una notificación, no mostrar otra inmediatamente
-    if (sessionStorage.getItem('lvn_desde_notificacion') === 'true') {
+    if (sessionStorage.getItem('lvn_v2_desde_notificacion') === 'true') {
         // Limpiar el flag para que en la próxima página sí se muestren
-        sessionStorage.removeItem('lvn_desde_notificacion');
+        sessionStorage.removeItem('lvn_v2_desde_notificacion');
         return;
     }
 
@@ -20,8 +20,8 @@ function verificarNuevosEpisodios() {
     hace7Dias.setDate(ahora.getDate() - 7);
 
     // Obtener episodios vistos y pospuestos del localStorage
-    const episodiosVistos = JSON.parse(localStorage.getItem('lvn_episodios_vistos') || '[]');
-    const episodiosPospuestos = JSON.parse(localStorage.getItem('lvn_episodios_pospuestos') || '{}');
+    const episodiosVistos = JSON.parse(localStorage.getItem('lvn_v2_episodios_vistos') || '[]');
+    const episodiosPospuestos = JSON.parse(localStorage.getItem('lvn_v2_episodios_pospuestos') || '{}');
 
     // Buscar episodios nuevos (últimos 7 días) que no se hayan visto
     const episodiosNuevos = episodios.filter(episodio => {
@@ -43,7 +43,7 @@ function verificarNuevosEpisodios() {
             }
             // Si ya pasó 1 hora, eliminar del pospuesto y permitir mostrar
             delete episodiosPospuestos[episodio.id];
-            localStorage.setItem('lvn_episodios_pospuestos', JSON.stringify(episodiosPospuestos));
+            localStorage.setItem('lvn_v2_episodios_pospuestos', JSON.stringify(episodiosPospuestos));
         }
 
         // Verificar si es de los últimos 7 días
@@ -198,7 +198,7 @@ function irAlEpisodio(episodioId) {
 
     // Marcar en sessionStorage que venimos de una notificación
     // para evitar que salte otra notificación inmediatamente al entrar
-    sessionStorage.setItem('lvn_desde_notificacion', 'true');
+    sessionStorage.setItem('lvn_v2_desde_notificacion', 'true');
 
     window.location.href = `episodio.html?id=${episodioId}`;
 }
@@ -212,7 +212,7 @@ function posponerNotificacion(episodioId) {
 
     // Guardar timestamp actual
     episodiosPospuestos[episodioId] = new Date().toISOString();
-    localStorage.setItem('lvn_episodios_pospuestos', JSON.stringify(episodiosPospuestos));
+    localStorage.setItem('lvn_v2_episodios_pospuestos', JSON.stringify(episodiosPospuestos));
 
     // Cerrar popup
     cerrarPopup();
@@ -227,14 +227,14 @@ function marcarEpisodioComoVisto(episodioId) {
 
     if (!episodiosVistos.includes(episodioId)) {
         episodiosVistos.push(episodioId);
-        localStorage.setItem('lvn_episodios_vistos', JSON.stringify(episodiosVistos));
+        localStorage.setItem('lvn_v2_episodios_vistos', JSON.stringify(episodiosVistos));
     }
 
     // También eliminar de pospuestos si existe
-    const episodiosPospuestos = JSON.parse(localStorage.getItem('lvn_episodios_pospuestos') || '{}');
+    const episodiosPospuestos = JSON.parse(localStorage.getItem('lvn_v2_episodios_pospuestos') || '{}');
     if (episodiosPospuestos[episodioId]) {
         delete episodiosPospuestos[episodioId];
-        localStorage.setItem('lvn_episodios_pospuestos', JSON.stringify(episodiosPospuestos));
+        localStorage.setItem('lvn_v2_episodios_pospuestos', JSON.stringify(episodiosPospuestos));
     }
 
     // Cerrar popup
