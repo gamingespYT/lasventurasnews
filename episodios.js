@@ -8,13 +8,20 @@ const episodios = [
     {
         id: 1,
         programaId: 1,
-        titulo: "NOTICIERO -  1ª EDICIÓN",
+        titulo: "NOTICIERO - 1ª EDICIÓN",
         descripcion: "",
         videoId: "cjVE2rTI2pg",
         fecha: "29 de Noviembre del 2025"
     }
     */
-   
+    {
+        id: 1,
+        programaId: 1,
+        titulo: "NOTICIERO - 1ª EDICIÓN",
+        descripcion: "<strong>INAUGURACIÓN DEL AEROPUERTO INTERNACIONAL DE LAS VENTURAS</strong><br>Bienvenidos al estreno de <strong>Las Venturas News</strong> con <strong>Josep Arias</strong>. La ciudad ha vivido hoy una jornada histórica con la apertura oficial del nuevo <strong>Aeropuerto Internacional</strong>, un evento que ha superado todas las expectativas de afluencia. Desde las primeras horas de la mañana, la llegada constante de aviones y nuevos ciudadanos provocó una saturación temporal en los controles de seguridad, desbordando al personal de gestión. No obstante, gracias a la rápida intervención de los equipos de seguridad, se lograron agilizar los trámites de acceso, normalizando el flujo de pasajeros tras el pico inicial de actividad. Las autoridades aeroportuarias confirman que el ritmo de operaciones es frenético, consolidando a <strong>Las Venturas</strong> como un nuevo núcleo de conexión global.<br><br><strong>PUBLICIDAD: ÁNGELES DEL ASFALTO</strong><br>Si eres un apasionado de las dos ruedas, <strong>Ángeles del Asfalto</strong> es tu lugar de referencia. Aquí tu moto siempre será tratada como parte de la familia. Además, te invitamos a visitar nuestro bar, donde podrás disfrutar de la mejor cerveza de la ciudad acompañada de nuestras famosas costillas y alitas. Te esperamos para compartir el auténtico espíritu motero en un ambiente inigualable.<br><br><strong>NUEVA PISCINA MUNICIPAL: CHAPUZÓN PRESIDENCIAL Y BIENESTAR</strong><br>El progreso de la ciudad suma un nuevo hito con la inauguración de la piscina municipal, un acto encabezado por el presidente del gobierno, <strong>Alex Asecas</strong>. Durante su discurso, el presidente destacó que este espacio ha sido diseñado para fomentar la convivencia entre jóvenes, familias y mayores, subrayando su compromiso con las infraestructuras públicas de calidad. La jornada se transformó en una fiesta vecinal donde el propio <strong>Alex Asecas</strong> protagonizó el momento más comentado al darse el primer chapuzón inaugural junto a los ciudadanos. Como nota curiosa, el mandatario advirtió con humor que se ha incorporado al agua el líquido especial que detecta la orina, asegurando así el respeto y la higiene en las nuevas instalaciones.<br><br><strong>PUBLICIDAD: OPOSICIONES ABIERTAS EN LA PLV</strong><br>La seguridad de nuestra comunidad es una vocación que requiere preparación constante y precisión absoluta. La <strong>Policía de Las Venturas (PLV)</strong> anuncia que las oposiciones al cuerpo están oficialmente abiertas. Buscamos personas valientes, con disciplina y fuerza, dispuestas a estar en primera línea para proteger lo que más importa bajo cualquier circunstancia. Si sientes el llamado del deber y quieres forjar un futuro basado en el servicio y la protección, <strong>Las Venturas</strong> te necesita. Da el paso y únete a la <strong>PLV</strong>.<br><br><strong>CIERRE DEL INFORMATIVO</strong><br>Con estas noticias de crecimiento y compromiso ciudadano cerramos nuestra primera edición. Gracias por acompañarnos en este gran estreno de <strong>Las Venturas News</strong>. Manténganse informados a través de nuestros canales oficiales. ¡Buenas noches y hasta la próxima entrega!",
+        videoId: "Uezq50hAJI0",
+        fecha: "21 de Marzo del 2026"
+    }
 
 
 ];

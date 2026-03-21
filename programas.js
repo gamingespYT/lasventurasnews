@@ -3,15 +3,15 @@
 // ========================================
 
 const programas = [
-    // {
-    //     id: 1,
-    //     nombre: "Noticiero",
-    //     descripcion: "Todas las noticias al alcance de la ciudadania",
-    //     imagen: "https://gamingespyt.github.io/lasventurasnews/img/news.png",
-    //     url: "programa.html?id=1",
-    //     animacion: "animate__fadeInLeft",
-    //     color: "#dc2626" // Rojo
-    // },
+    {
+        id: 1,
+        nombre: "Noticiero",
+        descripcion: "Todas las noticias al alcance de la ciudadania",
+        imagen: "https://gamingespyt.github.io/lasventurasnews/img/news.png",
+        url: "programa.html?id=1",
+        animacion: "animate__fadeInLeft",
+        color: "#dc2626" // Rojo
+    },
     // {
     //     id: 2,
     //     nombre: "¿Quién Sabe Más?",
