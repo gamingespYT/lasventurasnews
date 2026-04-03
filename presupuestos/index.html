@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Factura - Las Venturas News</title>
+  <title>Presupuesto - Las Venturas News</title>
   <link rel="icon" href="../img/logo.png">
-  <link rel="stylesheet" href="factura.css?v=1.0">
+  <link rel="stylesheet" href="../facturas/factura.css?v=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
@@ -27,7 +27,7 @@
         <p class="subtitle">Canal Oficial de Las Venturas</p>
       </div>
       <div class="invoice-info">
-        <h2>FACTURA</h2>
+        <h2 id="document-title">PRESUPUESTO</h2>
         <p><span id="invoice-number"></span></p>
         <p><strong>Fecha:</strong> <span id="invoice-date"></span></p>
       </div>
@@ -94,17 +94,18 @@
     </div>
 
     <div class="print-button-container">
+      <button id="convert-btn" onclick="convertToInvoice()" class="save-btn" style="display: none; background: linear-gradient(135deg, #10b981, #059669);">📄 Pasar a Factura</button>
       <button id="save-btn" onclick="saveInvoiceManually()" class="save-btn" style="display: none;">💾 Guardar</button>
       <button onclick="copyInvoiceCode()" class="code-btn">📋 Copiar Código</button>
       <button onclick="downloadAsPNG()" class="png-btn">🖨️ Imprimir</button>
-      <button onclick="window.location.href='../facturas/'" class="back-btn">✖️ Cerrar</button>
+      <button onclick="window.location.href='../presupuestos/'" class="back-btn">✖️ Cerrar</button>
     </div>
 
     <div id="code-notification" class="code-notification"></div>
   </div>
 
   <script src="../login/auth.js?v=1.0"></script>
-  <script src="factura.js?v=1.1"></script>
+  <script src="presupuesto.js?v=1.0"></script>
   <script>
     // Flecha volver: si está logueado → dashboard, si no → home
     const backBtn = document.getElementById('back-btn-home');

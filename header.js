@@ -138,6 +138,7 @@ function renderizarFooter() {
                             <li><a href="index.html" class="hover:text-red-500 transition">Inicio</a></li>
                             ${programas.map(p => `<li><a href="${p.url}" class="hover:text-red-500 transition">${p.nombre}</a></li>`).join('')}
                             <li><a href="facturas/" class="hover:text-red-500 transition">Facturas</a></li>
+                            <li><a href="presupuestos/" class="hover:text-red-500 transition">Presupuestos</a></li>
                             <li><a href="login/" class="hover:text-red-500 transition">Iniciar sesión</a></li>
                         </ul>
                     </div>

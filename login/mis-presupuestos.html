@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mis Facturas | Las Venturas News</title>
-    <meta name="description" content="Consulta y gestiona tus facturas guardadas en Las Venturas News.">
+    <title>Mis Presupuestos | Las Venturas News</title>
+    <meta name="description" content="Consulta y gestiona tus presupuestos guardados en Las Venturas News.">
     <link rel="icon" href="../img/logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -27,11 +27,11 @@
                     <span class="text-white">LAS VENTURAS </span><span class="text-red-500">NEWS</span>
                 </a>
                 <div class="flex items-center gap-4">
-                    <a href="facturas.html" class="text-slate-400 hover:text-white text-sm transition flex items-center gap-1.5" style="font-family: 'Inter', sans-serif;">
+                    <a href="presupuestos.html" class="text-slate-400 hover:text-white text-sm transition flex items-center gap-1.5" style="font-family: 'Inter', sans-serif;">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                         </svg>
-                        Nueva factura
+                        Nuevo presupuesto
                     </a>
                     <a href="dashboard.html" class="text-slate-400 hover:text-white text-sm transition flex items-center gap-1.5" style="font-family: 'Inter', sans-serif;">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -54,10 +54,10 @@
 
             <div class="fade-in mb-8">
                 <h1 class="text-2xl md:text-3xl font-bold text-white mb-2" style="font-family: 'Oswald', sans-serif;">
-                    MIS FACTURAS
+                    MIS PRESUPUESTOS
                 </h1>
                 <p class="text-slate-500 text-sm" style="font-family: 'Inter', sans-serif;">
-                    Consulta, busca y gestiona tus facturas guardadas.
+                    Consulta, busca y gestiona tus presupuestos guardados.
                 </p>
                 <div class="red-line mt-4" style="margin: 1rem 0 0 0;"></div>
             </div>
@@ -74,7 +74,7 @@
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                     </svg>
-                    Borrar todas
+                    Borrar todos
                 </button>
             </div>
 
@@ -83,7 +83,7 @@
                 <p id="invoice-count" class="text-slate-600 text-xs uppercase tracking-wider font-medium" style="font-family: 'Inter', sans-serif;"></p>
             </div>
 
-            <!-- Lista de facturas -->
+            <!-- Lista de presupuestos -->
             <div id="invoices-list" class="fade-in-delay space-y-3">
             </div>
 
@@ -94,7 +94,7 @@
     <script>
         Auth.protegerPagina();
 
-        const STORAGE_PREFIX = 'lvn_invoice_';
+        const STORAGE_PREFIX = 'lvn_quote_';
         const container = document.getElementById('invoices-list');
         const searchInput = document.getElementById('search-input');
         const countEl = document.getElementById('invoice-count');
@@ -137,7 +137,7 @@
                 )
                 : allInvoices;
 
-            countEl.textContent = `${filtered.length} factura${filtered.length !== 1 ? 's' : ''}${q ? ' encontrada' + (filtered.length !== 1 ? 's' : '') : ''}`;
+            countEl.textContent = `${filtered.length} presupuesto${filtered.length !== 1 ? 's' : ''}${q ? ' encontrado' + (filtered.length !== 1 ? 's' : '') : ''}`;
 
             if (filtered.length === 0) {
                 container.innerHTML = `
@@ -145,9 +145,9 @@
                         <svg class="w-14 h-14 mx-auto mb-4 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                         </svg>
-                        <p class="text-slate-400 text-base font-medium mb-1" style="font-family: 'Oswald', sans-serif;">${q ? 'SIN RESULTADOS' : 'NO HAY FACTURAS'}</p>
-                        <p class="text-slate-600 text-sm" style="font-family: 'Inter', sans-serif;">${q ? 'No se encontraron facturas con esa búsqueda.' : 'Las facturas que generes aparecerán aquí.'}</p>
-                        ${!q ? '<a href="facturas.html" class="inline-flex items-center gap-1.5 text-red-400 text-sm mt-4 hover:text-red-300 transition" style="font-family: \'Inter\', sans-serif;">Crear primera factura <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a>' : ''}
+                        <p class="text-slate-400 text-base font-medium mb-1" style="font-family: 'Oswald', sans-serif;">${q ? 'SIN RESULTADOS' : 'NO HAY PRESUPUESTOS'}</p>
+                        <p class="text-slate-600 text-sm" style="font-family: 'Inter', sans-serif;">${q ? 'No se encontraron presupuestos con esa búsqueda.' : 'Los presupuestos que generes aparecerán aquí.'}</p>
+                        ${!q ? '<a href="presupuestos.html" class="inline-flex items-center gap-1.5 text-red-400 text-sm mt-4 hover:text-red-300 transition" style="font-family: \'Inter\', sans-serif;">Crear primer presupuesto <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a>' : ''}
                     </div>
                 `;
                 return;
@@ -155,13 +155,13 @@
 
             container.innerHTML = filtered.map(inv => {
                 const code = buildCompact(inv);
-                const viewUrl = `../facturas/?data=${code}`;
+                const viewUrl = `../presupuestos/?data=${code}`;
                 const itemCount = (inv.items || []).length;
                 return `
                     <div class="login-card group flex items-center gap-4 p-5 hover:border-white/15" style="border-radius: 1rem;">
                         <a href="${viewUrl}" class="flex items-center gap-4 flex-1 min-w-0 no-underline">
-                            <div class="w-11 h-11 rounded-xl bg-amber-600/10 flex items-center justify-center flex-shrink-0 group-hover:bg-amber-600/20 transition">
-                                <svg class="w-5 h-5 text-amber-400/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="w-11 h-11 rounded-xl bg-blue-600/10 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-600/20 transition">
+                                <svg class="w-5 h-5 text-blue-400/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                                 </svg>
                             </div>
@@ -177,7 +177,7 @@
                                 <span class="text-red-400 font-bold text-lg" style="font-family: 'Oswald', sans-serif;">${(inv.finalTotal || 0).toLocaleString('es-ES', { minimumFractionDigits: 2 })}€</span>
                             </div>
                         </a>
-                        <button onclick="deleteInvoice('${inv._key}')" class="text-slate-600 hover:text-red-400 transition p-2 rounded-lg hover:bg-red-600/10 flex-shrink-0 cursor-pointer" title="Eliminar factura">
+                        <button onclick="deleteInvoice('${inv._key}')" class="text-slate-600 hover:text-red-400 transition p-2 rounded-lg hover:bg-red-600/10 flex-shrink-0 cursor-pointer" title="Eliminar presupuesto">
                             <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                             </svg>
@@ -187,19 +187,43 @@
             }).join('');
         }
 
+        function showConfirmModal(message, onConfirm) {
+            const overlay = document.createElement('div');
+            overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;animation:fadeIn .2s ease;';
+            overlay.innerHTML = `
+                <div style="background:#1e293b;border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:28px;max-width:380px;width:100%;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,0.5);font-family:'Inter',sans-serif;">
+                    <div style="width:48px;height:48px;background:rgba(239,68,68,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
+                        <svg width="24" height="24" fill="none" stroke="#ef4444" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>
+                    </div>
+                    <p style="color:#f1f5f9;font-size:0.95rem;margin-bottom:24px;line-height:1.5;">${message}</p>
+                    <div style="display:flex;gap:10px;justify-content:center;">
+                        <button id="modal-cancel" style="flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.15);background:transparent;color:#94a3b8;font-weight:600;cursor:pointer;font-size:0.9rem;transition:all .2s;font-family:'Inter',sans-serif;">Cancelar</button>
+                        <button id="modal-confirm" style="flex:1;padding:10px;border-radius:10px;border:none;background:linear-gradient(135deg,#dc2626,#b91c1c);color:white;font-weight:700;cursor:pointer;font-size:0.9rem;transition:all .2s;font-family:'Oswald',sans-serif;letter-spacing:0.5px;">Confirmar</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+            const close = () => overlay.remove();
+            overlay.querySelector('#modal-cancel').addEventListener('click', close);
+            overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+            overlay.querySelector('#modal-confirm').addEventListener('click', () => { close(); onConfirm(); });
+        }
+
         function deleteInvoice(key) {
-            if (!confirm('¿Eliminar esta factura?')) return;
-            localStorage.removeItem(key);
-            loadInvoices();
-            renderInvoices(searchInput.value);
+            showConfirmModal('¿Eliminar este presupuesto?', () => {
+                localStorage.removeItem(key);
+                loadInvoices();
+                renderInvoices(searchInput.value);
+            });
         }
 
         document.getElementById('btn-clear-all').addEventListener('click', () => {
             if (allInvoices.length === 0) return;
-            if (!confirm('¿Borrar todas las facturas guardadas? Esta acción no se puede deshacer.')) return;
-            allInvoices.forEach(inv => localStorage.removeItem(inv._key));
-            loadInvoices();
-            renderInvoices(searchInput.value);
+            showConfirmModal('¿Borrar todos los presupuestos guardados? Esta acción no se puede deshacer.', () => {
+                allInvoices.forEach(inv => localStorage.removeItem(inv._key));
+                loadInvoices();
+                renderInvoices(searchInput.value);
+            });
         });
 
         searchInput.addEventListener('input', () => {

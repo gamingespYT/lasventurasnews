@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generar Facturas | Las Venturas News</title>
-    <meta name="description" content="Generador de facturas de Las Venturas News.">
+    <title>Generar Presupuesto | Las Venturas News</title>
+    <meta name="description" content="Generador de presupuestos de Las Venturas News.">
     <link rel="icon" href="../img/logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -27,11 +27,11 @@
                     <span class="text-white">LAS VENTURAS </span><span class="text-red-500">NEWS</span>
                 </a>
                 <div class="flex items-center gap-4">
-                    <a href="./mis-facturas.html" class="text-slate-400 hover:text-white text-sm transition flex items-center gap-1.5" style="font-family: 'Inter', sans-serif;">
+                    <a href="./mis-presupuestos.html" class="text-slate-400 hover:text-white text-sm transition flex items-center gap-1.5" style="font-family: 'Inter', sans-serif;">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                         </svg>
-                        Ver facturas
+                        Ver presupuestos
                     </a>
                     <a href="dashboard.html" class="text-slate-400 hover:text-white text-sm transition flex items-center gap-1.5" style="font-family: 'Inter', sans-serif;">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -54,10 +54,10 @@
 
             <div class="fade-in mb-8">
                 <h1 class="text-2xl md:text-3xl font-bold text-white mb-2" style="font-family: 'Oswald', sans-serif;">
-                    GENERAR FACTURA
+                    GENERAR PRESUPUESTO
                 </h1>
                 <p class="text-slate-500 text-sm" style="font-family: 'Inter', sans-serif;">
-                    Completa los datos para generar una factura.
+                    Completa los datos para crear un presupuesto.
                 </p>
                 <div class="red-line mt-4" style="margin: 1rem 0 0 0;"></div>
             </div>
@@ -94,7 +94,7 @@
                         <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                         </svg>
-                        Detalle de la factura
+                        Detalle del presupuesto
                     </h2>
 
                     <div id="items-container" class="space-y-3 mb-4">
@@ -148,11 +148,11 @@
                         </svg>
                         Notas adicionales
                     </h2>
-                    <textarea id="factura-notas" class="login-input" style="padding-left: 1rem; min-height: 80px; resize: vertical;" placeholder="Notas opcionales para la factura..."></textarea>
+                    <textarea id="factura-notas" class="login-input" style="padding-left: 1rem; min-height: 80px; resize: vertical;" placeholder="Notas opcionales para el presupuesto..."></textarea>
                 </div>
 
                 <button type="submit" class="login-btn">
-                    <span id="btn-text">GENERAR FACTURA</span>
+                    <span id="btn-text">GENERAR PRESUPUESTO</span>
                 </button>
             </form>
 
@@ -267,7 +267,7 @@
         modePercent.addEventListener('click', () => setDiscountMode('p'));
         modeFixed.addEventListener('click', () => setDiscountMode('f'));
 
-        // Generar factura → construir v2 compact y redirigir al visor
+        // Generar presupuesto
         form.addEventListener('submit', (e) => {
             e.preventDefault();
 
@@ -278,7 +278,6 @@
             const dMode = descuentoMode.value; // 'p' or 'f'
             const notes = document.getElementById('factura-notas').value.trim();
 
-            // Recoger items
             const items = [];
             itemsContainer.querySelectorAll('.item-row').forEach(row => {
                 const concepto = row.querySelector('.item-concepto').value.trim();
@@ -303,17 +302,15 @@
 
             // Confirmación si el valor es negativo
             if (finalTotal < 0) {
-                showConfirmModal(`¿Seguro que quieres generar una factura de <strong>${finalTotal.toLocaleString('es-ES', { minimumFractionDigits: 2 })}€</strong>?`, () => {
-                    generateInvoice(name, org, phone, items, total, discount, discountPercent, finalTotal, dMode, notes);
+                showConfirmModal(`¿Seguro que quieres generar un presupuesto de <strong>${finalTotal.toLocaleString('es-ES', { minimumFractionDigits: 2 })}€</strong>?`, () => {
+                    generateQuote(name, org, phone, items, total, discount, discountPercent, finalTotal, dMode, notes);
                 });
                 return;
             }
-            generateInvoice(name, org, phone, items, total, discount, discountPercent, finalTotal, dMode, notes);
+            generateQuote(name, org, phone, items, total, discount, discountPercent, finalTotal, dMode, notes);
         });
 
-        function generateInvoice(name, org, phone, items, total, discount, discountPercent, finalTotal, dMode, notes) {
-
-            // Generar número de factura
+        function generateQuote(name, org, phone, items, total, discount, discountPercent, finalTotal, dMode, notes) {
             const now = new Date();
             const y = now.getFullYear();
             const m = String(now.getMonth() + 1).padStart(2, '0');
@@ -321,9 +318,8 @@
             const h = String(now.getHours()).padStart(2, '0');
             const min = String(now.getMinutes()).padStart(2, '0');
             const s = String(now.getSeconds()).padStart(2, '0');
-            const invoiceNumber = `LVN-${y}${m}${d}-${h}${min}${s}`;
+            const invoiceNumber = `PRE-${y}${m}${d}-${h}${min}${s}`;
 
-            // Construir v2 compact
             const dateMs = Date.now();
             const itemsStr = items.map(it => `${encodeURIComponent(it.concepto)}~${it.precio}`).join(',');
             const compact = [
@@ -342,84 +338,12 @@
             ].join('|');
 
             const code = encodeURIComponent(compact);
-
-            // Redirigir al visor de facturas
-            window.location.href = `../facturas/?data=${code}&src=gen`;
+            window.location.href = `../presupuestos/?data=${code}&src=gen`;
         }
 
-        // Logout
         document.getElementById('btn-logout').addEventListener('click', () => {
             Auth.logout();
             window.location.href = 'index.html';
-        });
-
-        // Lógica para pre-rellenar desde presupuesto
-        window.addEventListener('DOMContentLoaded', () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const fromQuote = urlParams.get('from_quote');
-            if (fromQuote) {
-                try {
-                    const compact = decodeURIComponent(fromQuote);
-                    const parts = compact.split('|');
-                    
-                    // Mismo parseador que en factura.js
-                    const name = decodeURIComponent(parts[1] || '');
-                    const org = decodeURIComponent(parts[2] || '');
-                    const phone = decodeURIComponent(parts[3] || '');
-                    const notes = decodeURIComponent(parts[9] || '');
-                    const itemsRaw = parts[10] || '';
-                    const discountModeVal = parts[11] || 'p';
-                    const discountPercentVal = Number(parts[6]) || 0;
-                    const discountAmountVal = Number(parts[5]) || 0;
-
-                    document.getElementById('cliente-nombre').value = name;
-                    document.getElementById('cliente-organizacion').value = org;
-                    document.getElementById('cliente-telefono').value = phone;
-                    document.getElementById('factura-notas').value = notes;
-
-                    // Items
-                    if (itemsRaw) {
-                        const items = itemsRaw.split(',').map(it => {
-                            const f = it.split('~');
-                            return { concepto: decodeURIComponent(f[0] || ''), precio: Number(f[1]) || 0 };
-                        });
-
-                        // Limpiar contenedor y añadir items
-                        itemsContainer.innerHTML = '';
-                        items.forEach((item, index) => {
-                            const row = document.createElement('div');
-                            row.className = 'item-row grid grid-cols-[1fr_100px_auto] gap-3 items-end';
-                            row.innerHTML = `
-                                <div>
-                                    ${index === 0 ? '<label class="block text-slate-400 text-xs font-medium mb-2 uppercase tracking-wider" style="font-family: \'Inter\', sans-serif;">Servicio</label>' : ''}
-                                    <input type="text" class="login-input item-concepto" style="padding-left: 1rem;" placeholder="Descripción del servicio" value="${item.concepto}" required>
-                                </div>
-                                <div>
-                                    ${index === 0 ? '<label class="block text-slate-400 text-xs font-medium mb-2 uppercase tracking-wider" style="font-family: \'Inter\', sans-serif;">Precio (€)</label>' : ''}
-                                    <input type="number" class="login-input item-precio" style="padding-left: 1rem;" placeholder="0" min="0" step="0.01" value="${item.precio}" required>
-                                </div>
-                                <button type="button" class="btn-remove-item ${items.length <= 1 ? 'hidden' : ''} text-red-400/50 hover:text-red-400 transition mb-1 p-2" title="Eliminar">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                    </svg>
-                                </button>
-                            `;
-                            itemsContainer.appendChild(row);
-                        });
-                    }
-
-                    // Descuento
-                    if (discountAmountVal > 0) {
-                        descuentoToggle.checked = true;
-                        descuentoWrapper.classList.remove('hidden');
-                        setDiscountMode(discountModeVal);
-                        descuentoInput.value = (discountModeVal === 'p') ? discountPercentVal : discountAmountVal;
-                    }
-
-                } catch (e) {
-                    console.error('Error al pre-rellenar desde presupuesto:', e);
-                }
-            }
         });
     </script>
 </body>

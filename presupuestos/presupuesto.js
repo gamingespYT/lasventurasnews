@@ -1,8 +1,9 @@
 // ========================================
-// SISTEMA DE FACTURAS v2 — Las Venturas News
+// SISTEMA DE PRESUPUESTOS v1 — Las Venturas News
 // ========================================
 
-const STORAGE_PREFIX = 'lvn_invoice_';
+const STORAGE_PREFIX = 'lvn_quote_';
+const DOC_TYPE = 'Presupuesto';
 
 // Modal de confirmación personalizado
 function showConfirmModal(message, onConfirm) {
@@ -38,8 +39,8 @@ function getInvoiceData() {
     try {
       return parseCompactInvoice(decodeURIComponent(invoiceCode));
     } catch (error) {
-      console.error('Error al decodificar código de factura:', error);
-      document.body.innerHTML = '<div style="text-align:center;padding:50px;font-family:Inter,sans-serif;color:#fff;"><h1>❌ Error</h1><p>Código de factura inválido</p><button onclick="window.location.href=\'../login/facturas.html\'" style="margin-top:20px;padding:10px 20px;cursor:pointer;border:none;border-radius:8px;background:#dc2626;color:#fff;font-weight:bold;">Volver</button></div>';
+      console.error('Error al decodificar código de presupuesto:', error);
+      document.body.innerHTML = '<div style="text-align:center;padding:50px;font-family:Inter,sans-serif;color:#fff;"><h1>❌ Error</h1><p>Código de presupuesto inválido</p><button onclick="window.location.href=\'../login/presupuestos.html\'" style="margin-top:20px;padding:10px 20px;cursor:pointer;border:none;border-radius:8px;background:#dc2626;color:#fff;font-weight:bold;">Volver</button></div>';
       return null;
     }
   }
@@ -53,13 +54,12 @@ function getInvoiceData() {
     return parseCompactInvoice(decodeURIComponent(encodedData));
   } catch (error) {
     console.error('Error al decodificar datos:', error);
-    document.body.innerHTML = '<div style="text-align:center;padding:50px;font-family:Inter,sans-serif;color:#fff;"><h1>❌ Error</h1><p>Datos de factura inválidos</p><button onclick="window.location.href=\'../login/facturas.html\'" style="margin-top:20px;padding:10px 20px;cursor:pointer;border:none;border-radius:8px;background:#dc2626;color:#fff;font-weight:bold;">Volver</button></div>';
+    document.body.innerHTML = '<div style="text-align:center;padding:50px;font-family:Inter,sans-serif;color:#fff;"><h1>❌ Error</h1><p>Datos de presupuesto inválidos</p><button onclick="window.location.href=\'../login/presupuestos.html\'" style="margin-top:20px;padding:10px 20px;cursor:pointer;border:none;border-radius:8px;background:#dc2626;color:#fff;font-weight:bold;">Volver</button></div>';
     return null;
   }
 }
 
-// Parseador del formato compacto
-// Formato: dateMs|name|org|phone|total|discount|discountPercent|finalTotal|invoiceNumber|notes|items|discountMode
+// Parseador del formato compacto (mismo que facturas)
 function parseCompactInvoice(compact) {
   const parts = compact.split('|');
   try {
@@ -74,7 +74,7 @@ function parseCompactInvoice(compact) {
     const invoiceNumber = parts[8] || '';
     const notes = decodeURIComponent(parts[9] || '');
     const itemsRaw = parts[10] || '';
-    const discountMode = parts[11] || 'p'; // 'p' = porcentaje, 'f' = cantidad fija
+    const discountMode = parts[11] || 'p';
 
     const items = itemsRaw.length === 0 ? [] : itemsRaw.split(',').map(it => {
       const f = it.split('~');
@@ -96,7 +96,7 @@ function parseCompactInvoice(compact) {
   }
 }
 
-// Construir el compact v2 desde un objeto de datos
+// Construir el compact v2
 function buildCompactInvoice(data) {
   const dateMs = Date.parse(data.date) || Date.now();
   const itemsStr = (data.items || []).map(it => {
@@ -135,22 +135,22 @@ function showSearchInterface() {
         <h1 style="font-family:'Oswald',sans-serif;font-size:1.6rem;letter-spacing:-0.5px;">
           LAS VENTURAS <span style="color:#dc2626;">NEWS</span>
         </h1>
-        <p class="search-subtitle" style="margin-top:4px;">Buscar o consultar facturas guardadas</p>
+        <p class="search-subtitle" style="margin-top:4px;">Buscar o consultar presupuestos guardados</p>
         <form onsubmit="searchInvoice(event)" class="search-form">
           <textarea
             id="invoice-search"
-            placeholder="Pega aquí el código de factura completo..."
+            placeholder="Pega aquí el código de presupuesto completo..."
             class="search-input"
             rows="3"
             required
           ></textarea>
-          <button type="submit" class="search-btn">🔍 Buscar Factura</button>
+          <button type="submit" class="search-btn">🔍 Buscar Presupuesto</button>
         </form>
         <div id="search-result" class="search-result"></div>
         <div class="recent-invoices">
           <div class="recent-header">
-            <h3>Facturas Guardadas</h3>
-            <button onclick="clearAllInvoices()" class="clear-btn">🗑️ Borrar Todas</button>
+            <h3>Presupuestos Guardados</h3>
+            <button onclick="clearAllInvoices()" class="clear-btn">🗑️ Borrar Todos</button>
           </div>
           <div id="recent-list"></div>
         </div>
@@ -340,12 +340,13 @@ function showSearchInterface() {
       }
       .back-home:hover { background: rgba(255,255,255,0.2); }
     </style>
+    <link rel="stylesheet" href="../facturas/factura.css?v=1.0">
   `;
 
   displayRecentInvoices();
 }
 
-// Mostrar facturas recientes
+// Mostrar presupuestos recientes
 function displayRecentInvoices() {
   const recentList = document.getElementById('recent-list');
   if (!recentList) return;
@@ -360,7 +361,7 @@ function displayRecentInvoices() {
         invoice.storageKey = key;
         invoices.push(invoice);
       } catch (error) {
-        console.error('Error al cargar factura:', error);
+        console.error('Error al cargar presupuesto:', error);
       }
     }
   }
@@ -368,7 +369,7 @@ function displayRecentInvoices() {
   invoices.sort((a, b) => new Date(b.date) - new Date(a.date));
 
   if (invoices.length === 0) {
-    recentList.innerHTML = '<p class="no-recent">No hay facturas guardadas</p>';
+    recentList.innerHTML = '<p class="no-recent">No hay presupuestos guardados</p>';
     return;
   }
 
@@ -390,25 +391,25 @@ function displayRecentInvoices() {
   }).join('');
 }
 
-// Borrar una factura
+// Borrar un presupuesto
 function deleteInvoice(storageKey) {
-  showConfirmModal('¿Estás seguro de que quieres eliminar esta factura?', () => {
-  localStorage.removeItem(storageKey);
-  displayRecentInvoices();
+  showConfirmModal('¿Estás seguro de que quieres eliminar este presupuesto?', () => {
+    localStorage.removeItem(storageKey);
+    displayRecentInvoices();
 
-  const resultDiv = document.getElementById('search-result');
-  if (resultDiv) {
-    resultDiv.style.background = 'rgba(5,150,105,0.15)';
-    resultDiv.style.color = '#6ee7b7';
-    resultDiv.textContent = '✅ Factura eliminada';
-    setTimeout(() => { resultDiv.textContent = ''; resultDiv.style.background = ''; resultDiv.style.color = ''; }, 3000);
-  }
+    const resultDiv = document.getElementById('search-result');
+    if (resultDiv) {
+      resultDiv.style.background = 'rgba(5,150,105,0.15)';
+      resultDiv.style.color = '#6ee7b7';
+      resultDiv.textContent = '✅ Presupuesto eliminado';
+      setTimeout(() => { resultDiv.textContent = ''; resultDiv.style.background = ''; resultDiv.style.color = ''; }, 3000);
+    }
   });
 }
 
-// Borrar todas las facturas
+// Borrar todos los presupuestos
 function clearAllInvoices() {
-  showConfirmModal('¿Borrar todas las facturas guardadas? Esta acción no se puede deshacer.', () => {
+  showConfirmModal('¿Borrar todos los presupuestos guardados? Esta acción no se puede deshacer.', () => {
     const keysToDelete = [];
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
@@ -419,24 +420,23 @@ function clearAllInvoices() {
   });
 }
 
-// Buscar factura
+// Buscar presupuesto
 function searchInvoice(event) {
   event.preventDefault();
   const invoiceCode = document.getElementById('invoice-search').value.trim();
   const resultDiv = document.getElementById('search-result');
 
   try {
-    // Verificar que el código es válido intentando parsearlo
     parseCompactInvoice(decodeURIComponent(invoiceCode));
     window.location.href = `?data=${invoiceCode}`;
   } catch (error) {
     resultDiv.className = 'search-result error';
-    resultDiv.textContent = '❌ Código de factura inválido.';
+    resultDiv.textContent = '❌ Código de presupuesto inválido.';
     setTimeout(() => { resultDiv.textContent = ''; resultDiv.className = 'search-result'; }, 4000);
   }
 }
 
-// Generar número de factura
+// Generar número de presupuesto
 function generateInvoiceNumber() {
   const now = new Date();
   const y = now.getFullYear();
@@ -445,7 +445,7 @@ function generateInvoiceNumber() {
   const h = String(now.getHours()).padStart(2, '0');
   const min = String(now.getMinutes()).padStart(2, '0');
   const s = String(now.getSeconds()).padStart(2, '0');
-  return `LVN-${y}${m}${d}-${h}${min}${s}`;
+  return `PRE-${y}${m}${d}-${h}${min}${s}`;
 }
 
 // Formatear fecha
@@ -454,7 +454,7 @@ function formatDate(dateString) {
   return `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()} - ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
 }
 
-// Llenar la factura con los datos
+// Llenar el presupuesto con los datos
 function populateInvoice() {
   const data = getInvoiceData();
   if (!data) return;
@@ -469,19 +469,23 @@ function populateInvoice() {
   const isFromGenerator = urlParams.get('src') === 'gen';
 
   if (!isAlreadySaved && isFromGenerator) {
-    // Auto-guardar solo cuando viene del generador (admin)
     try {
       localStorage.setItem(`${STORAGE_PREFIX}${invoiceNumber}`, JSON.stringify(data));
     } catch (error) {
-      console.error('Error al guardar factura:', error);
+      console.error('Error al guardar presupuesto:', error);
     }
   } else if (!isAlreadySaved) {
-    // Si viene de un código, mostrar botón de guardar
     const saveBtn = document.getElementById('save-btn');
     if (saveBtn) saveBtn.style.display = 'inline-block';
   }
 
-  // Info de factura
+  // Si está logueado, mostrar botón de convertir a factura
+  if (typeof Auth !== 'undefined' && Auth.isAuthenticated()) {
+    const convertBtn = document.getElementById('convert-btn');
+    if (convertBtn) convertBtn.style.display = 'inline-block';
+  }
+
+  // Info
   document.getElementById('invoice-number').textContent = invoiceNumber;
   document.getElementById('invoice-date').textContent = formatDate(data.date);
 
@@ -534,17 +538,23 @@ function populateInvoice() {
     notesSection.style.display = 'none';
   }
 
-  document.title = `Factura ${invoiceNumber} - Las Venturas News`;
+  document.title = `Presupuesto ${invoiceNumber} - Las Venturas News`;
 
   window.currentInvoiceCode = invoiceCode;
   window.currentInvoiceData = data;
   window.currentInvoiceNumber = invoiceNumber;
 }
 
-// Guardar factura manualmente
+// Convertir a factura
+function convertToInvoice() {
+  if (!window.currentInvoiceCode) return;
+  window.location.href = `../login/facturas.html?from_quote=${window.currentInvoiceCode}`;
+}
+
+// Guardar manualmente
 function saveInvoiceManually() {
   if (!window.currentInvoiceData || !window.currentInvoiceNumber) {
-    showCodeNotification('⚠️ No hay datos de factura', 'error');
+    showCodeNotification('⚠️ No hay datos', 'error');
     return;
   }
 
@@ -552,13 +562,13 @@ function saveInvoiceManually() {
     localStorage.setItem(`${STORAGE_PREFIX}${window.currentInvoiceNumber}`, JSON.stringify(window.currentInvoiceData));
     const saveBtn = document.getElementById('save-btn');
     if (saveBtn) saveBtn.style.display = 'none';
-    showCodeNotification('✅ Factura guardada', 'success');
+    showCodeNotification('✅ Presupuesto guardado', 'success');
   } catch (error) {
     showCodeNotification('❌ Error al guardar', 'error');
   }
 }
 
-// Copiar código de factura
+// Copiar código
 function copyInvoiceCode() {
   if (!window.currentInvoiceCode) {
     showCodeNotification('⚠️ No hay código disponible', 'error');
@@ -581,7 +591,7 @@ function showCodeNotification(message, type) {
   setTimeout(() => notification.classList.remove('show'), 4000);
 }
 
-// Descargar como PNG (tamaño mínimo A4)
+// Descargar como PNG
 async function downloadAsPNG() {
   const container = document.querySelector('.invoice-container');
   const buttons = document.querySelector('.print-button-container');
@@ -594,18 +604,15 @@ async function downloadAsPNG() {
 
   showCodeNotification('⏳ Generando imagen...', 'success');
 
-  // Dimensiones A4 a 96 DPI (px)
   const A4_W = 794;
   const A4_H = 1123;
   const SCALE = 2;
 
-  // Guardar estilos originales del contenedor
   const origMinWidth = container.style.minWidth;
   const origMinHeight = container.style.minHeight;
   const origWidth = container.style.width;
   const origBorderRadius = container.style.borderRadius;
 
-  // Forzar dimensiones mínimas A4 y quitar border-radius para la captura
   container.style.minWidth = A4_W + 'px';
   container.style.minHeight = A4_H + 'px';
   container.style.width = A4_W + 'px';
@@ -622,7 +629,6 @@ async function downloadAsPNG() {
       allowTaint: true
     });
 
-    // Asegurar que el canvas final tenga al menos tamaño A4 × SCALE
     const minW = A4_W * SCALE;
     const minH = A4_H * SCALE;
     let finalCanvas = canvas;
@@ -634,7 +640,6 @@ async function downloadAsPNG() {
       const ctx = finalCanvas.getContext('2d');
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(0, 0, finalCanvas.width, finalCanvas.height);
-      // Centrar el contenido horizontalmente, alinear arriba
       const offsetX = Math.round((finalCanvas.width - canvas.width) / 2);
       ctx.drawImage(canvas, offsetX, 0);
     }
@@ -642,7 +647,7 @@ async function downloadAsPNG() {
     finalCanvas.toBlob((blob) => {
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
-      link.download = `Factura_${document.getElementById('invoice-number').textContent}.png`;
+      link.download = `Presupuesto_${document.getElementById('invoice-number').textContent}.png`;
       link.href = url;
       link.click();
       URL.revokeObjectURL(url);
@@ -653,7 +658,6 @@ async function downloadAsPNG() {
     console.error('Error al generar PNG:', error);
     showCodeNotification('❌ Error al generar imagen', 'error');
   } finally {
-    // Restaurar estilos originales
     container.style.minWidth = origMinWidth;
     container.style.minHeight = origMinHeight;
     container.style.width = origWidth;
