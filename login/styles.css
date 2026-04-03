@@ -345,3 +345,83 @@
     0%, 100% { transform: translateY(0) scale(1); opacity: 0.3; }
     50% { transform: translateY(-20px) scale(1.5); opacity: 0.6; }
 }
+
+/* ========================================
+   CARNET GENERATOR
+   ======================================== */
+
+/* Photo preview container */
+.foto-preview-container {
+    width: 120px;
+    height: 160px;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    background: rgba(0, 0, 0, 0.3);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.foto-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.foto-preview-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* File upload area */
+.file-upload-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    border: 2px dashed rgba(255, 255, 255, 0.12);
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    min-height: 120px;
+}
+
+.file-upload-area:hover {
+    border-color: rgba(239, 68, 68, 0.4);
+    background: rgba(239, 68, 68, 0.05);
+}
+
+.file-upload-area.drag-over {
+    border-color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
+    transform: scale(1.02);
+}
+
+/* Canvas wrapper */
+.carnet-canvas-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: repeating-conic-gradient(
+        rgba(255, 255, 255, 0.03) 0% 25%,
+        rgba(0, 0, 0, 0.1) 0% 50%
+    ) 50% / 20px 20px;
+    border-radius: 1rem;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.carnet-canvas-wrapper canvas {
+    max-width: 100%;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.6),
+                0 0 40px rgba(220, 38, 38, 0.15);
+}
+
