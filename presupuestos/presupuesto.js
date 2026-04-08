@@ -647,7 +647,7 @@ async function downloadAsPNG() {
     finalCanvas.toBlob((blob) => {
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
-      link.download = `Presupuesto_${document.getElementById('invoice-number').textContent}.png`;
+      link.download = `${document.getElementById('invoice-number').textContent}.png`;
       link.href = url;
       link.click();
       URL.revokeObjectURL(url);
